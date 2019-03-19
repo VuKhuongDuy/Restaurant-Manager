@@ -1,0 +1,59 @@
+#tables-payment{
+    width: 100%;
+    height: 500px;
+    margin-top: 20px;
+    position: absolute;
+    left: 10px;
+    display: none;
+}
+
+.img-bill{
+    width: 80%;
+    height: 600px;
+    z-index: -10;
+    position: absolute;
+    left: 150px;
+    top: 10px;
+}
+
+#bill-detail{
+    width: 40%;
+    height: 450px;
+    margin-left: 300px;
+    position: absolute;
+    left: 150px;
+    margin-top: 33px;
+}
+
+.detail-txtIDTable{
+    position: absolute;
+    right: 3px;
+}
+
+#tables-payment th:nth-child(1){
+    width: 60%;
+    text-align: left;
+}
+
+#tables-payment td:nth-child(1){
+    text-align: left;
+}
+
+#tables-payment th:nth-child(2), #tables-payment th:nth-child(3){
+    width: 20%;
+}
+
+#tables-payment td{
+    border-top: 1px solid #e6e6e6;
+    font-size: 16px;
+}
+
+#bill-detail .table-detail-menu {
+    overflow: auto;
+    width: 100%;
+    height: 300px;
+}
+
+#bill-detail .btn-success{
+    margin-top: 30px;
+}

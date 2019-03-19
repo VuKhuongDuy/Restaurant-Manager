@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "category":"Food",
+        "name": "Gà quay",
+        "price": 300000
+    },
+    {
+        "id": 2,
+        "category": "Food",
+        "name": "Mực xào",
+        "price": 400000
+    },
+    {
+        "id": 3,
+        "category": "Food",
+        "name": "Bò bít tết",
+        "price": 200000
+    },
+    {
+        "id": 1,
+        "category": "Fruice",
+        "name": "Cà fe",
+        "price": 200000
+    },
+    {
+        "id": 2,
+        "category": "Fruice",
+        "name": "Nước cam",
+        "price": 200000
+    }
+]

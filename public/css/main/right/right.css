@@ -1,0 +1,11 @@
+#main-right{
+    width: 84.8%;
+    height: 940px;
+    margin-left: 230px;
+}
+
+.main-right-header{
+    width: 100%;
+    height: 50px;
+    background-color: #f2f2f2;
+}

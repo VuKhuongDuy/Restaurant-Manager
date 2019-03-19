@@ -1,0 +1,146 @@
+#home{
+    width: 100%;
+    height: 830px;
+}
+
+.home-element{
+    width: 86%;
+    margin: 25px;
+    margin-left: 80px;
+    
+}
+
+.bar{
+    width: 1100px;
+    height: 30px;
+    border-bottom: 1px solid gray;
+    margin-left: 80px;
+    margin-bottom: 60px;
+}
+
+#home-room{
+    height: 500px;
+    background-color: #e6e6e6;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.75) 0px 5px 20px;
+}
+
+.home-table{
+    width: 100px;
+    height: 130px;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 20px;
+    float: left;
+    text-align: center;
+}
+
+#home .home-table:hover{
+    color: green;
+}
+
+#home .home-table{
+    padding-top: 5px;
+    color: red;
+}
+
+.home-room-img{
+    width: 100px;
+    height: 100px;
+}
+
+#home-thongke{
+    height: 200px;
+    width: 46%;
+    border-bottom: 1px solid #DCE8F1;
+    float: left;
+}
+
+.home-element-header{
+    width: 100%;
+    height: 30px;
+    border-bottom: 1px solid #DCE8F1;
+    font-size: 20px;
+    text-align: left;
+}
+
+#thongke-header{
+    color: #4383B4;
+}
+    
+.tblDoanhthu td:nth-child(2){
+    text-align: right;
+}
+
+.thongke-doanhthu{
+    width: 35%;
+    height: 85%;
+    float: left;
+    padding-top: 10px;
+    text-align: left;
+    border-right: 1px solid #DCE8F1;
+}
+
+
+.thongke-xephangmonan{
+    width: 60%;
+    height: 85%;
+    margin-left: 40%;
+    padding-top: 10px;
+}
+
+#home-thongke th,td{
+    word-break:break-all;
+    height: 32px;
+}
+
+.thongke-table tbody tr td:nth-child(1){
+    text-align: left;
+}
+
+.thongke-table tbody tr td:nth-child(2){
+    text-align: right;
+}
+
+.thongke-xephangmonan th, .thongke-xephangmonan tr{
+    width: 100%;
+}
+
+#lichlamviec-header{
+    color: #e5a21d;
+}
+
+#home-lichlamviec{
+    width: 47%;
+    height: 200px;
+    margin-left: 53%;
+    margin-top: 10px;
+    border-bottom: 1px solid #DCE8F1;
+}
+
+#lichlamviec-table{
+    width: 100%;
+    height: 85%;
+    overflow-x: auto;
+}
+
+#lichlamviec-table table{
+    width: 100%;
+}
+
+#home-lichlamviec tr td:nth-child(1), #home-lichlamviec tr th:nth-child(1){
+    width: 25%;
+}
+
+#home-lichlamviec tr td:nth-child(2), #home-lichlamviec tr th:nth-child(2){
+    width: 40%;
+    text-align: center;
+}
+
+#home-lichlamviec tr td:nth-child(3), #home-lichlamviec tr th:nth-child(3){
+    width: 35%;
+    text-align: center;
+}
+
