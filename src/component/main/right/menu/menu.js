@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import DishComp from './DishComp'
-import db from '../food.json'
+import db from '../Json/food.json'
 
 class Menu extends Component {
     constructor(props) {
@@ -52,16 +52,17 @@ class Menu extends Component {
         });
     }
 
-    clickSearch(category) {
+    clickSearch(category) { 
         this.btnSearch.addEventListener('click', function () {
             let strSearch = this.txtSearch.value;
             let arrResult = [];
             if (strSearch.length > 0) {
                 this.ListDish.forEach(aDish => {
                     if (aDish.name.indexOf(strSearch) >= 0)
-                        arrResult.push(aDish);
+                        arrResult.push(aDish);  
                 });
                 this.ListDish = arrResult;
+                console.log(this.ListDish);
             }
             else
                 this.ListDish = db;
@@ -144,7 +145,7 @@ class Menu extends Component {
         return (
             listDish.map((value, key) => {
                 if (value.category === category)
-                    return <DishComp funcEdit = {this.edit.bind(this)} key={key} name={value.name} price={value.price} src={'./img/List' + category + "/" + value.id + ".jpg"} />
+                    return <DishComp funcEdit = {this.edit.bind(this)} key={key} name={value.name} price={value.price} src={'../img/List' + category + "/" + value.id + ".jpg"} />
             })
         )
     }

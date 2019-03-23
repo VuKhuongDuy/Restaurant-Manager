@@ -36,9 +36,9 @@ export default class TablesAddFood extends Component {
                     <i className="fa fa-pencil-square-o" aria-hidden="true" style={{ marginRight: "5px"}}></i>
                 Gọi món</div>
                 <div className="tables-selection-img">
-                    <img src="./img/staff.png" alt="staff" style={{width:" 400px", height:"500px"}}/>
+                    <img src="../img/staff.png" alt="staff" style={{width:" 400px", height:"500px"}}/>
                 </div>
-                <img src="./img/notebook.png" alt="notebook" style={{width: "70%", height:"100%", position:"absolute",right:"120px",zIndex:'-1'}}></img>
+                <img src="../img/notebook.png" alt="notebook" style={{width: "70%", height:"100%", position:"absolute",right:"120px",zIndex:'-1'}}></img>
                 <div className="tables-selection-main">
                     <div className="addFood-select">
                         <select id="cbxListFood" ref="cbxListFood">

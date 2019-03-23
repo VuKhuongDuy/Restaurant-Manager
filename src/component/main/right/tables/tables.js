@@ -4,7 +4,7 @@ import TablesAddFood from './tablesAddFood'
 import TablesPayment from './tablesPayment'
 import Left from '../../left/left'
 import ATable from './aTable'
-import db from '../table.json'
+import db from '../Json/table.json'
 
 export default class Tables extends Component {
     constructor(props) {
@@ -12,13 +12,14 @@ export default class Tables extends Component {
 
         this.state = {
             changing: "false",
-            idTableChange: "0",
-        }
+            idTableNow: 0,
+            reload: 0
+        };
     }
 
     componentDidMount() {
+        console.log('did mount');
         this.rightTables = document.getElementById('right-tables');
-        this.homeTables = this.rightTables.getElementsByClassName('home-table');
         this.tableDetail = this.refs.Detail;
         this.btnChangeTable = this.rightTables.getElementsByClassName('select-change');
         this.tablesRoom = this.refs.tablesRoom;
@@ -26,29 +27,21 @@ export default class Tables extends Component {
         this.FormPayment = this.rightTables.getElementsByClassName('form-Payment');
         this.leftLink = document.getElementsByClassName('left-link');
         this.TablesLeft = this.leftLink[1];
-        this.clickTable();
         this.addTable();
-        this.ChangeTable();
         this.clickAddFoodAndPayment();
         this.clickReturnTableRoom();
     }
 
-
     addTable() {
         let btnAdd = document.getElementById('home-table-add');
-        let self = this;
         btnAdd.addEventListener('click', function () {
-            var tablesRoom = document.getElementById('tables-room');
-            var homeTable = tablesRoom.getElementsByClassName('home-table');
-            var newTable = document.createElement('div');
-            newTable.className = 'home-table';
-            newTable.innerHTML = homeTable[0].innerHTML;
-            tablesRoom.insertBefore(newTable, btnAdd);
-            self.clickTable();
-            self.addTable();
-            self.ChangeTable();
-            self.clickAddFoodAndPayment();
-        })
+            var newTable = {
+                id: db[db.length - 1].id + 1,
+                status: 'false'
+            };
+            db.push(newTable);
+            this.reRender();
+        }.bind(this))
     }
 
     clickReturnTableRoom() {
@@ -63,6 +56,7 @@ export default class Tables extends Component {
 
     // neet edit
     clickAddFoodAndPayment() {
+        this.homeTables = this.rightTables.getElementsByClassName('home-table');
         for (let i = 0; i < this.homeTables.length - 1; i++) {
             let btnAdd = this.homeTables[i].getElementsByClassName("select-add");
             let btnPayment = this.homeTables[i].getElementsByClassName("select-payment");
@@ -85,57 +79,21 @@ export default class Tables extends Component {
         }
     }
 
-    // need edit
-    ChangeTable() {
-        let self = this;
-        for (let i = 0; i < this.btnChangeTable.length; i++) {
-            this.btnChangeTable[i].addEventListener('click', function (e) {
-                if (self.state.changing == "false") {
-                    self.state.changing = "true";
-                    self.HideAllSelection();
-                }
-            });
-        }
+    setIdTableChange(id) {
+        this.state.idTableNow = id;
+    }
+
+    reRender(){
+        this.setState({
+            reload: 2
+        })
     }
 
     HideAllSelection() {
+        this.homeTables = this.rightTables.getElementsByClassName('home-table');
         for (let i = 0; i < this.homeTables.length - 1; i++) {
-            let tablesSelection = this.homeTables[i].getElementsByClassName('tables-selection'); // lấy selection từng bàn
+            let tablesSelection = this.homeTables[i].getElementsByClassName('tables-selection');
             tablesSelection[0].style.display = "none";  // cho ẩn selection đi hết
-        }
-    }
-
-    clickTable() {
-        var self = this;
-        var lblIDTable = self.tableDetail.getElementsByClassName('txtIDTable');
-
-        for (let i = 0; i < this.homeTables.length - 1; i++) {
-            this.homeTables[i].addEventListener('click', function (e) { //sự kiện click cho từng bàn
-
-                var idTableThis = this.getElementsByClassName('idTable');  // id của bàn vừa click
-
-                if (self.state.changing == "false") {  // so sánh xem có đang chuyển bàn
-                    let thisTableSelection = this.getElementsByClassName('tables-selection'); // lấy selection của bàn vừa click
-                    self.state.idTableChange = idTableThis[0].innerHTML;  // cho id bàn muốn chuyển = id bàn vừa click
-                    self.HideAllSelection();
-                    thisTableSelection[0].style.display = "inline-block"; // hiện selection của bàn mình chọn
-                    lblIDTable[0].innerHTML = idTableThis[0].innerHTML; // thay đổi id ở bảng chi tiết
-                    this.style.color = "red";
-                } else if (self.state.changing == "true") {
-                    if (idTableThis[0].innerHTML == self.state.idTableChange) // kiểm tra xem bàn vừa click có trùng id vối bàn định chuyển đi
-                        return;
-                    for (let i = 0; i < self.homeTables.length - 1; i++) {
-                        let idTable = self.homeTables[i].getElementsByClassName('idTable'); // id của từng bàn
-                        if (idTable[0].innerHTML == self.state.idTableChange) {  // so sánh id từng bàn với id bàn cũ
-                            idTable[0].innerHTML = idTableThis[0].innerHTML; // đổi id 2 bàn cho nhau
-                            idTableThis[0].innerHTML = self.state.idTableChange; // đổi id 2 bàn cho nhau
-                            self.state.changing = "false";
-                            this.style.color = "black";
-                            return;
-                        }
-                    }
-                }
-            })
         }
     }
 
@@ -147,7 +105,7 @@ export default class Tables extends Component {
                         {
                             db.map((value, key) => {
                                 return (
-                                    <ATable id={value.id} status={value.status} key={key} />
+                                    <ATable funcIdTable={this.setIdTableChange.bind(this)} id={value.id} status={value.status} key={key} changing={this.state.changing} />
                                 )
                             })
                         }
@@ -158,7 +116,7 @@ export default class Tables extends Component {
                     </div>
                     <div id="table-detail" ref="Detail">
                         <div className="title">
-                            <img src="./img/table-detail.png" style={{ marginRight: '7px' }} />
+                            <img src="../img/table-detail.png" style={{ marginRight: '7px' }} />
                             Chi tiết bàn</div>
                         <div className="date">
                             <i className="fa fa-calendar-check-o" aria-hidden="true" style={{ position: "absolute", left: "3px", marginTop: '12px', color: '#1f67af' }}></i>

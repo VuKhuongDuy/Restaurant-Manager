@@ -1,0 +1,130 @@
+#Login{
+    width: 100%;
+    height: 800px;
+    position: relative;
+}
+
+.Login-BackGround{
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    position: absolute;
+}
+
+.background-up{
+    width: 100%;
+    height: 50%;
+    background-color: #4298f4;
+}
+
+.background-down{
+    width: 100%;
+    height: 50%;
+    position: relative;
+}
+
+.img1{
+    width: 280px;
+    height: auto;
+    left: 200px;
+    position: absolute;
+}
+
+.img2{
+    width: 280px;
+    height: auto;
+    position: absolute;
+    right: 200px;
+}
+
+.Login-Form{
+    width: 400px;
+    height: 500px;
+    background-color: white;
+    box-shadow: black 0px 0px 25px;
+    z-index: 3;
+    border-radius: 7%;
+    margin-top: 140px;
+    left: 570px;
+    position: absolute;
+}
+
+.title{
+    margin-top: 35px;
+    font-size: 26px;
+    color: #240468;
+}
+
+.txtLogin{
+    width: 85%;
+    height: 50px;
+    left:25px;
+    background-color: #f2d9e6;
+    box-shadow: black 0px 1px 2px;
+    border: none;
+    padding-left: 13px;
+    z-index: 4;
+    position: absolute;
+    font-size: 18px;
+}
+
+.txtLogin:focus{
+    box-shadow: #2e028c 0px 1px 6px;
+    background-color:  #d98cb3;
+}
+
+.txtLogin:hover{
+    background-color:  #d98cb3;
+}
+
+.txtUser{
+    margin-top: 30px;
+}
+
+.txtPassword{
+    margin-top: 115px;
+}
+
+
+.forgot-password{
+    margin-top: 185px;
+    left: 30px;
+    position: absolute;
+    font-size: 16px;
+}
+
+.btn-loginIn{
+    width: 250px;
+    height: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 235px;
+    border-radius: 2%;
+    box-shadow: black 0px 1px 2px;
+    transition: width 1s;
+}
+
+.btn-loginIn:hover{
+    width: 280px;
+    color: white;
+    box-shadow: #2e028c 0px 1px 1px;
+    background-image: linear-gradient(to right, #0000cc ,#6600cc );
+}
+
+.btn-loginUp{
+    width: 250px;
+    height: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 40px;
+    border-radius: 2%;
+    box-shadow: black 0px 1px 2px;
+    transition: width 1s;
+}
+
+.btn-loginUp:hover{
+    width: 280px;
+    color: white;
+    box-shadow: #2e028c 0px 1px 1px;
+    background-image: linear-gradient(to right, #0000cc ,#6600cc );
+}

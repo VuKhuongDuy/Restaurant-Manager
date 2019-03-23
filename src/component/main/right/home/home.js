@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ATable from './ATable'
-import db from '../table.json'
+import db from '../Json/table.json'
 
 export default class Home extends Component {
 

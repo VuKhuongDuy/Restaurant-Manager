@@ -8,25 +8,33 @@
 #tables-room{
     width: 50%;
     height: 600px;
-    background-color: #fdfdfd;
+    background-color: #e6e6e6;
     text-align: center;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 10px;
+    box-shadow: rgba(0, 0, 0, 0.75) 0px 5px 15px;
     overflow: auto;
     border-radius: 0.5;
     display: block;
     padding-left: 15px;
     float: left;
 }
+#tables-room .home-table{
+    width: 130px;
+    height: 130px;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 20px;
+    float: left;
+    text-align: center;
+}
+
 /* <img src="./img/table-add.png" alt="table" className="home-room-img" style={{ width: "90px", height: 'auto', borderRadius:" 0.5", float: 'left', paddingTop: "15px", marginLeft: '15px'}} /> */
 /* <i className="fa fa-info-circle" style={{ color: " #d9d9d9", marginRight:'5px'}} aria-hidden="true"></i> */
 #home-table-add{
-    width: 100px;
-    height: 100px;
     margin-top: 14px;
-    margin-left: 15px;
     border-radius: 50%;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 9px;
-    font-size: 100px;
     color:green;
     line-height: 77%;
 }
@@ -37,6 +45,8 @@
 
 .txtAdd{
     float: left;
+    font-size: 160px;
+    margin-top: 34px;
     width: 100%;
     height: 100%;
 }

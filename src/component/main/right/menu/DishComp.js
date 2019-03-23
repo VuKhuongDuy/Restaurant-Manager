@@ -20,18 +20,15 @@ class DishComp extends Component {
 
     clickOption(){
         this.btnOption.addEventListener('click',function(){
+            console.log(this.state.option);
             if(this.state.option == "true"){
                 this.btnEdit.style.display = "none";
                 this.btnRemove.style.display = "none";
-                this.setState = {
-                    option: "true"
-                }
+                this.state.option = "false";
             }else if(this.state.option == "false"){
                 this.btnEdit.style.display = "inline";
                 this.btnRemove.style.display = "inline";
-                this.setState = {
-                    option: "false"
-                }
+                this.state.option = "true";
             }
         }.bind(this));
     }

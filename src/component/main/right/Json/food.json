@@ -1,14 +1,14 @@
 [
     {
         "id": 1,
-        "category":"Food",
+        "category": "Food",
         "name": "Gà quay",
         "price": 300000
     },
     {
         "id": 2,
         "category": "Food",
-        "name": "Mực xào",
+        "name": "Mựct xào",
         "price": 400000
     },
     {

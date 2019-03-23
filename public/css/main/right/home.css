@@ -19,13 +19,13 @@
 }
 
 #home-room{
-    height: 500px;
+    height: 453px;
     background-color: #e6e6e6;
     text-align: center;
     box-shadow: rgba(0, 0, 0, 0.75) 0px 5px 20px;
 }
 
-.home-table{
+#home-room .home-table{
     width: 100px;
     height: 130px;
     margin-left: 25px;

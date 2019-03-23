@@ -19,7 +19,7 @@ export default class TablesPayment extends Component {
     render() {
         return (
             <div id="tables-payment" className="form-Payment" ref="form_Payment">
-                <img src="./img/bill.png" alt='bill' className="img-bill" />
+                <img src="../img/bill.png" alt='bill' className="img-bill" />
                 <div id="bill-detail">
                     <div className="title">
                         Hóa đơn

@@ -1,0 +1,120 @@
+@font-face{
+    font-family: fontHeader;
+    src: url(./Archivo_Black/ArchivoBlack-Regular.ttf);
+}
+
+#Employees{
+    width: 100%;
+    height: 900px;
+}
+
+#Employees-header{
+    width: 100%;
+    height: 70px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 2px;
+    position: relative;
+}
+
+.Employees-img{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 390px;
+    margin-top: 15px;
+}
+
+#Employees-title{
+    font-size: 35px;
+    position: absolute;
+    left: 440px;
+    color: #438eb9;
+    font-family: fontHeader;
+    margin-top: 13px;
+}
+
+.Employees-btn-addEmployee{
+    position: absolute;
+    right: 20px;
+    margin-top: 20px;
+    height: 40px;
+}
+
+#Employees-main{
+    width: 97%;
+    height: 90%;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+#Employees table{
+    width: 100%;
+}
+
+#Employees tr{
+    width: 100%;
+    height: 50px;
+}
+
+#Employees th{
+    font-size: 20px;
+    border-bottom: 0.4px solid gray;
+}
+
+#Employees td{
+    height: 40px;
+    color: black;
+    font-size: 16px;
+    text-align: left;
+}
+
+#Employees td:nth-child(1){
+    font-weight: bold;
+}
+
+#Employees td:nth-child(7) .btn, #Employees td:nth-child(8) .btn{
+    width: 85%;
+    height: 95%;
+    border-radius: 50%;
+}
+
+.btn-editEmployee{
+    background-color: #663d00;
+}
+
+.btn-removeEmployee{
+    background-color: #660000;
+}
+
+.Employee-label{
+    width: 20%;
+    height: 100%;
+    float: left;
+}
+
+.Employee-label label{
+    width: 100%;
+    height: 65px;
+    text-align: left;
+}
+
+.Employee-input{
+    width: 80%;
+    /* height: 100%; */
+    float: left;
+}
+
+.Employee-input input{
+    width: 100%;
+    height: 40px;
+    margin-bottom: 25px;
+}
+
+.btn-accept-employee{
+    position: absolute;
+    left: 220px;
+}
+
+
+
+
+

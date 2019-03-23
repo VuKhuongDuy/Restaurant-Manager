@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "hoten":"Vu Khuong Duy",
+        "ngaysinh":"23/05/1999",
+        "vaitro":"Chủ nhà hàng",
+        "luong":"30000000",
+        "danglam":"Có"
+    },
+    {
+        "id": 2,
+        "hoten": "Vũ Minh Nghĩa",
+        "ngaysinh": "22/04/1998",
+        "vaitro": "Đầu bếp",
+        "luong": "10000000",
+        "danglam": "Có"
+    },
+    {
+        "id": 3,
+        "hoten": "Hoàng Hồng Quân",
+        "ngaysinh": "13/01/1999",
+        "vaitro": "Bồi bàn",
+        "luong": "5000000",
+        "danglam": "Có"
+    }
+]
