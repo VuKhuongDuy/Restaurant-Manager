@@ -4,7 +4,8 @@
     float: left;
     font-weight: bold;
     background-color: #f2f2f2;
-    border-right: 0.3px solid gray;
+    /* box-shadow: black 0px 0px 7px; */
+    /* border-right: 0.3px solid gray; */
 }
 
 #main-left li{

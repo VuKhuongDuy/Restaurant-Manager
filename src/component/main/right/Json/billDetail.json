@@ -1,0 +1,29 @@
+[
+    {
+        "id":1,
+        "dishes":
+        [
+            {
+                "name":"Gà quay",
+                "count":1
+            },
+            {
+                "name": "Bò bít tết",
+                "count": 2
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "dishes": [
+            {
+                "name": "Mì gà",
+                "count": 3
+            },
+            {
+                "name": "Mực nướng",
+                "count": 2
+            }
+        ]
+    }
+]

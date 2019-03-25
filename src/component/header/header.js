@@ -37,7 +37,7 @@ export default class Header extends Component {
                         <i className="fa fa-caret-down btn-setting" ref="btn-setting" onClick={this.clickSetting.bind(this)}></i>
                         <div id="form-setting" ref="form_setting">
                             <li ref="setting" className="li li-setting">
-                                <NavLink to="/setting">Thiết lập</NavLink>
+                                <NavLink to="/dashboard/setting">Đổi mật khẩu</NavLink>
                             </li>
                             <li ref="logout" className="li li-logout">
                                 <a href="http://localhost:3000/">Đăng xuất</a>

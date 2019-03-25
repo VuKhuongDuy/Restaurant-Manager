@@ -1,24 +1,38 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import Tables from './main/right/tables/tables'
 import Header from './header/header'
-import Left from './main/left/left'
-import Right from './main/right/right'
-import Main from './main/main'
-import Footer from './footer/footer'
+import Left from "./main/left/left"
+import Setting from "./main/right/setting/setting"
+import Menu from "./main/right/menu/menu"
+import Employees from "./main/right/employees/employees"
+import Home from "./main/right/home/home"
+import History from './main/right/history/history.js'
+import Footer from './footer/footer';
 import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
 
-export default class MyRouter extends Component {
+class MyRouter extends Component {
     render() {
         return (
-            <Router>
+            <div>
+                <Header />
                 <div>
-                    <Header />
-                    <Main>
-                        <Left />
-                        <Right />
-                    </Main>
-                    <Footer />
+                    <Left />
+                    <div>
+                        <div id="main-right">
+                            <div className="main-right-header"></div>
+                            <Route path="/dashboard/setting" component={Setting}/>
+                            <Route path="/dashboard/tables" component={Tables} />
+                            <Route path="/dashboard/menu" component={Menu} />
+                            <Route path="/dashboard/employees" component={Employees} />
+                            <Route path="/dashboard/history" component={History} />
+                            <Route exact path="/dashboard/" component={Home} />
+                        </div>
+                    </div>
                 </div>
-            </Router>
-        )
+                <Footer />
+            </div>
+        );
     }
 }
+
+export default MyRouter;

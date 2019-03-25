@@ -19,9 +19,12 @@ export default class Left extends Component {
                 for (let i = 0; i < leftSelected.length; i++) {
                     let decor = leftSelected[i].getElementsByClassName('decor-btn');
                     decor[0].style.backgroundColor = "#f2f2f2";        
+                    leftSelected[i].style.boxShadow="none";
                 }
-                let decor = this.getElementsByClassName('decor-btn');
-                decor[0].style.backgroundColor = "#438eb9";
+                // let decor = this.getElementsByClassName('decor-btn');
+                // decor[0].style.backgroundColor = "indianred";
+                // this.style.boxShadow = "rgba(0, 0, 0, 0.7) 0px 0px 4px";
+                this.style.backgroundImage = "linear-gradient(to right, #f2f2f2 , #ffffff)";
             })
         }
     }
@@ -67,6 +70,15 @@ export default class Left extends Component {
                                 <i className="fa fa-users" aria-hidden="true" style={{ width: 'auto', height: '100%', marginRight: '5px' }} />
                                 Nhân viên
                                 </div>
+                            <div className="decor-btn"></div>
+                        </NavLink>
+                    </li>
+                    <li id="left-history" className="left-link">
+                        <NavLink to="/dashboard/history">
+                            <div id="left-body-history" className="left-selecter">
+                                <i className="fa fa-history" aria-hidden="true" style={{ width: 'auto', height: '100%', marginRight: '5px' }} />
+                                Lịch sử
+                            </div>
                             <div className="decor-btn"></div>
                         </NavLink>
                     </li>

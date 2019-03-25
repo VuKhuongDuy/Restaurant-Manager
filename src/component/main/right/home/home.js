@@ -19,7 +19,7 @@ export default class Home extends Component {
                 <div className="bar"></div>
                 <div className="home-element">
                     <div id="home-thongke">
-                        <div className="home-element-header" id="thongke-header">
+                        <div className="home-element-header" id="thongke-header" style={{fontWeight:"bold"}}>
                             <i className="fa fa-bar-chart" aria-hidden="true" style={{ marginRight: '5px' }} />
                             Thống kê
                         </div>
@@ -76,7 +76,7 @@ export default class Home extends Component {
                         </div>
                     </div>
                     <div id="home-lichlamviec">
-                        <div className="home-element-header" id="lichlamviec-header">
+                        <div className="home-element-header" id="lichlamviec-header" style={{ fontWeight: "bold" }}>
                             <i className="fa fa-calendar" aria-hidden="true" style={{ marginRight: '5px' }}></i>
                             Nhân viên trực
                         </div>

@@ -1,0 +1,103 @@
+#history{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#history-optionSearch{
+    width: 430px;
+    height: 80px;
+    left: 30px;
+    margin-top: 60px;
+    position: absolute;
+}
+
+.partOption{
+    line-height: 37px;
+    position: absolute;
+}
+
+.partOption div{
+    display: block;
+}
+.ckbHistory{
+    width: 9%;
+    height: 100%;
+    left:0;
+}
+
+.lblHistory{
+    width: 30%;
+    height: 100%;
+    left: 40px;
+}
+
+.inputHistory{
+    width: 42%;
+    height: 100%;
+    right:80px;
+}
+
+#history label{
+    color: black;
+}
+
+#history .btn-success{
+    width: 60px;
+    height: 60px;
+    margin-top: 5px;
+    right:0;
+    position: absolute;
+}
+
+#history-ListBill{
+    width: 500px;
+    overflow: auto;
+    height: 700px;
+    margin-top: 170px;
+    position: absolute;
+    left: 40px;
+}
+
+#history table{
+    width: 100%;
+}
+
+#history tr{
+    width: 100%;
+    height: 40px;
+}
+
+
+#history th:nth-child(1),#history th:nth-child(2){
+    width: 15%;
+    height: 40px;
+    font-size: 17px;
+    border-bottom: 1px solid gray;
+    text-align: left;
+}
+
+#history th:nth-child(3),#history th:nth-child(4){
+    width: 35%;
+    height: 40px;
+    font-size: 17px;
+    border-bottom: 1px solid gray;
+    text-align: right;
+}
+
+#history td:nth-child(1),#history td:nth-child(2){
+    text-align: left;
+}
+
+#history td:nth-child(3),#history td:nth-child(4){
+    text-align: right;
+}
+
+#history-DetailBill{
+    width: 500px;
+    height: 500px;
+    position: absolute;
+    right: 130px;
+    margin-top: 170px;
+}
+
