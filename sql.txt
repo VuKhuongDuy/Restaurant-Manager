@@ -1,0 +1,13 @@
+﻿- 1 nhà hàng có nhiều bàn
+- mỗi bàn có nhiều bill, nhưng chỉ có 1 bill vào 1 thời điểm, bàn sẽ trống hoặc có người
+- mỗi bill có nhiều món ăn
+- mỗi nhà hàng có nhiều nhân viên
+- mỗi nhân viên có : tên, ngày sinh, giới tính,chức vụ, lương
+- thực đơn có nhiều món ăn
+
+Table(ID,status
+Bill(ID,{idTable},ngaythang,tongtien
+Food(ID, name, price
+employees(ID,name,sex,birthdaydate,phone,salary,chuc vu
+BIllDetail({ID},id_food, MON,so luong
+user(account, password)

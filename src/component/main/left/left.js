@@ -21,10 +21,9 @@ export default class Left extends Component {
                     decor[0].style.backgroundColor = "#f2f2f2";        
                     leftSelected[i].style.boxShadow="none";
                 }
-                // let decor = this.getElementsByClassName('decor-btn');
-                // decor[0].style.backgroundColor = "indianred";
-                // this.style.boxShadow = "rgba(0, 0, 0, 0.7) 0px 0px 4px";
-                this.style.backgroundImage = "linear-gradient(to right, #f2f2f2 , #ffffff)";
+                let decor = this.getElementsByClassName('decor-btn');
+                decor[0].style.backgroundColor = "indianred";
+                this.style.boxShadow = "rgba(0, 0, 0, 0.7) 0px 0px 4px";
             })
         }
     }

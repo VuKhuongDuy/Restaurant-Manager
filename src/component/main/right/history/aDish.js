@@ -4,11 +4,10 @@ class aDish extends Component {
     render() {
         return (
             <tr>
-                <td>this.props.id</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>this.props.name</td>
+                <td>this.props.price</td>
+                <td>this.props.count</td>
+                <td>this.props.cost</td>
             </tr>
         );
     }

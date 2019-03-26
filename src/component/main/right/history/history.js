@@ -1,14 +1,28 @@
 import React, { Component } from 'react';
 import dbBill from '../Json/bill.json'
 import dbBillDetail from '../Json/billDetail.json';
-import ABill from './aBill.js'
+import ABill from './aBill.js';
+import ADish from './aDish.js';
 
 class history extends Component {
     componentDidMount(){
         this.showListBill();
     }
 
-    showBillDetail(id){
+    componentWillMount(){
+        this.listDish = [];
+    }
+
+    showBillDetail(){
+        // if(this.listDish.length>0)
+        // return this.listDish.map((value,key)=>{
+        //     for(let i=0;i<value.dishes.length;i++){
+        //         return <ADish name={value.dishes[i]} price={value}
+        //     }
+        // })
+    }
+
+    takeBillDetailFromDataBase(id){
         dbBillDetail.map((value,key)=>{
             if(value.id == id){
 
@@ -65,9 +79,7 @@ class history extends Component {
                                 <th>Ngày thanh toán</th>
                                 <th>Tiền thanh toán</th>
                             </tr>
-                            {
-                                this.showListBill()
-                            }
+                            {this.showListBill()}
                         </tfoot>
                     </table>
                 </div>
@@ -80,6 +92,7 @@ class history extends Component {
                                 <th>Số lượng</th>
                                 <th>Tổng tiền</th>
                             </tr>
+                            {this.showBillDetail()}
                         </tfoot>
                     </table>
                 </div>
