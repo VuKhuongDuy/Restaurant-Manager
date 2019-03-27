@@ -68,6 +68,10 @@
     height: 40px;
 }
 
+#history tr:hover{
+    font-weight: bold;
+}
+
 
 #history th:nth-child(1),#history th:nth-child(2){
     width: 15%;

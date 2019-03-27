@@ -29,6 +29,11 @@
     text-align: center;
 }
 
+.home-table:hover{
+    transform: scale(1.1,1.1);
+    transition: 0.3s;
+}
+
 /* <img src="./img/table-add.png" alt="table" className="home-room-img" style={{ width: "90px", height: 'auto', borderRadius:" 0.5", float: 'left', paddingTop: "15px", marginLeft: '15px'}} /> */
 /* <i className="fa fa-info-circle" style={{ color: " #d9d9d9", marginRight:'5px'}} aria-hidden="true"></i> */
 #home-table-add{
