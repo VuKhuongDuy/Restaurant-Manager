@@ -3,6 +3,27 @@ import MyRouter from '../MyRouter';
 import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
 
 class login extends Component {
+
+    componentDidMount(){
+        const data = {
+            name: 1
+        };
+        const url = "http://localhost:3001/";
+        const response = fetch(url, {
+            method:'POST',
+            body:data,
+            headers:{
+                Accept: 'application/json',
+            }
+        }).then((response)=>{
+            if(response.ok){
+                response.json().then(json=>{
+                    console.log(json);
+                })
+            }
+        })
+    }
+
     render() {
         return (
             <div id="Login">
