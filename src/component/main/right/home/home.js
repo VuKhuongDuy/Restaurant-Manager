@@ -9,21 +9,25 @@ export default class Home extends Component {
     }
 
     componentDidMount() {
+        const data = {
+            name:1
+        }
         const url = "http://localhost:3001/dashboard";
         const response = fetch(url, {
-            method: 'POST',
-            body: "body",
+            method: "GET", // *GET, POST, PUT, DELETE, etc.
+            mode: "cors", // no-cors, cors, *same-origin
+            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: "same-origin", // include, *same-origin, omit
             headers: {
-                Accept: 'application/json',
-                "Content-Type": "text/plain"
-            }
-        }).then((response) => {
-            if (response.ok) {
-                response.json().then(json => {
-                    this.setState({posts: json.sex});
-                })
-            }
+                "Content-Type": "application/json",
+            },
+            redirect: "follow", // manual, *follow, error
+            referrer: "no-referrer", // no-referrer, *client
         })
+            .then(response=>response.json())
+            .then(data=>{
+                console.log(data);
+            }) ;
     }
 
     render() {

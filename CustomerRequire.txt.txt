@@ -1,0 +1,8 @@
+﻿Yêu cầu:
+1: quản lí hiện trạng của các bàn
+2: Quản lí danh sách thực đơn
+3: Xem lịch sử các hóa đơn
+4: quản lí nhân viên
+5: đưa ra những đánh giá cũng như thống kê
+6: có thể thay sổ ghi, chỉ việc thao tác với smart phone hoặc computer
+7: quản lí doanh thu
