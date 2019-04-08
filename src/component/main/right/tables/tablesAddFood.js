@@ -3,6 +3,12 @@ import React, { Component } from 'react'
 export default class TablesAddFood extends Component {
     constructor(props) {
         super(props);
+
+        this.foods = [];
+        this.state = {
+            isLoading: "true"
+        }
+        this.loadData();
     }
     
     componentDidMount(){
@@ -13,6 +19,33 @@ export default class TablesAddFood extends Component {
         this.tableDetailMenu = this.refs.tableDetailMenu;
         this.tbody = this.tableDetailMenu.getElementsByTagName('tbody');
         this.clickAddFood();
+    }
+
+    loadData(){
+        const data = {
+            name:1
+        }
+
+        const url = "http://localhost:3001/dashboard/tables/addfood/2";
+        fetch(url,{
+            method: "GET",
+            mode:"cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type":"application/json",
+            },
+            redirect:"follow",
+            referrer:"no-referrer"
+        }).then(response => response.json())
+            .then(data=>{
+                data[0].map((value,key)=>{
+                    this.foods.push(value);
+                })
+                this.setState({
+                    isLoading:"false"
+                })
+            })
     }
 
     clickAddFood(){
@@ -29,6 +62,13 @@ export default class TablesAddFood extends Component {
         })
     }
 
+    renderlistfood(){
+        console.log(this.foods);
+        return this.foods.map((value,key)=>{
+            return <option value={key}>{value.food_name}</option>
+        })  
+    }
+
     render() {
         return (
             <div id="tables-addFood" className="form-AddFood">
@@ -36,16 +76,15 @@ export default class TablesAddFood extends Component {
                     <i className="fa fa-pencil-square-o" aria-hidden="true" style={{ marginRight: "5px"}}></i>
                 Gọi món</div>
                 <div className="tables-selection-img">
-                    <img src="../img/staff.png" alt="staff" style={{width:" 400px", height:"500px"}}/>
+                    <img src="../../../img/staff.png" alt="staff" style={{width:" 400px", height:"500px"}}/>
                 </div>
-                <img src="../img/notebook.png" alt="notebook" style={{width: "70%", height:"100%", position:"absolute",right:"120px",zIndex:'-1'}}></img>
+                <img src="../../../img/notebook.png" alt="notebook" style={{width: "70%", height:"100%", position:"absolute",right:"120px",zIndex:'-1'}}></img>
                 <div className="tables-selection-main">
                     <div className="addFood-select">
                         <select id="cbxListFood" ref="cbxListFood">
-                            <option value={"Món 1"}>Món 1</option>
-                            <option value={"Món 2"}>Món 2</option>
-                            <option value={"Món 3"}>Món 3</option>
-                            <option value={"Món 4"}>Món 3</option>
+                            {
+                                this.state.isLoading === "false"?this.renderlistfood():<option></option>
+                            }
                         </select>
                         <input type="number" name="quantity" min={0} max={100} placeholder="Số lượng" id="dishCount" ref="dishCount" />
                         <button type="button" className="btn btn-success" ref="btnAddFood">Gọi</button>

@@ -15,6 +15,7 @@ body{
     box-shadow: black 0px 0.5px 3px;
     position: relative;
     color: white;
+    z-index: 1;
 }
 
 .header-logo img{
@@ -71,6 +72,7 @@ body{
     height: 136%;
     top: 40px;
     left:-70px;
+    z-index: 10;
     padding-top: 8px;
     background-color: #e6e6e6;
     border-radius: 5%;

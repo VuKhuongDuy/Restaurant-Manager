@@ -14,7 +14,7 @@ class Setting extends Component {
         oldPassword.value = oldPassword.value.trim();
         newPassword.value = newPassword.value.trim();
 
-        if (db[0].password == oldPassword.value) {
+        if (db[0].password === oldPassword.value) {
             db[0].account = account.value;
             db[0].account = newPassword;
             alert("Lưu thành công");

@@ -131,7 +131,8 @@
 }
 
 #home-lichlamviec tr td:nth-child(1), #home-lichlamviec tr th:nth-child(1){
-    width: 25%;
+    width: 40%;
+    text-align: left;
 }
 
 #home-lichlamviec tr td:nth-child(2), #home-lichlamviec tr th:nth-child(2){
@@ -140,7 +141,7 @@
 }
 
 #home-lichlamviec tr td:nth-child(3), #home-lichlamviec tr th:nth-child(3){
-    width: 35%;
+    width: 20%;
     text-align: center;
 }
 

@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 
 class ATable extends Component {
     showListTable(){
-        if (this.props.status === "true")
+        if (this.props.status === "notempty"){
             return <img src='../img/table-havePeo.png' alt="tableimg" className="home-room-img" />
-        else if (this.props.status === "false")
+        }
+        else if (this.props.status === "empty")
             return <img src='../img/table-no.png' alt="tableimg" className="home-room-img" />
     }
 

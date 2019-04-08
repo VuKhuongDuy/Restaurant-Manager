@@ -50,10 +50,10 @@
 
 .txtAdd{
     float: left;
-    font-size: 160px;
-    margin-top: 34px;
+    font-size: 100px;
+    line-height: 100%;
     width: 100%;
-    height: 100%;
+    height:100%;
 }
 
 .opacity{

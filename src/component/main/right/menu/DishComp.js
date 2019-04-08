@@ -21,14 +21,18 @@ class DishComp extends Component {
     clickOption(){
         this.btnOption.addEventListener('click',function(){
             console.log(this.state.option);
-            if(this.state.option == "true"){
+            if(this.state.option === "true"){
                 this.btnEdit.style.display = "none";
                 this.btnRemove.style.display = "none";
-                this.state.option = "false";
-            }else if(this.state.option == "false"){
+                this.setState({
+                    option : "false"
+                });
+            }else if(this.state.option === "false"){
                 this.btnEdit.style.display = "inline";
                 this.btnRemove.style.display = "inline";
-                this.state.option = "true";
+                this.setState({
+                    option : "true"
+                });
             }
         }.bind(this));
     }

@@ -1,8 +1,4 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
-import TablesAddFood from './tablesAddFood'
-import TablesPayment from './tablesPayment'
-import Left from '../../left/left'
 import ATable from './aTable'
 import db from '../Json/table.json'
 
@@ -12,24 +8,63 @@ export default class Tables extends Component {
 
         this.state = {
             changing: "false",
-            idTableNow: 0,
-            reload: 0
+            idTableNow: "0",
+            reload: "0",
+            isLoading: "true"
         };
+
+        this.now = new Date();
+        this.date = this.now.getDate() + "/" + this.now.getMonth() + "/" + this.now.getFullYear();
+        this.tables = [];
+        this.billdetail = [];
+        this.tableClicked = {
+            id_table: 0,
+            status: 'empty'
+        }
+        this.loadData();
     }
 
     componentDidMount() {
-        console.log('did mount');
+        console.log('table did mount');
         this.rightTables = document.getElementById('right-tables');
         this.tableDetail = this.refs.Detail;
         this.btnChangeTable = this.rightTables.getElementsByClassName('select-change');
         this.tablesRoom = this.refs.tablesRoom;
-        this.FormAddFood = this.rightTables.getElementsByClassName('form-AddFood');
-        this.FormPayment = this.rightTables.getElementsByClassName('form-Payment');
         this.leftLink = document.getElementsByClassName('left-link');
         this.TablesLeft = this.leftLink[1];
         this.addTable();
-        this.clickAddFoodAndPayment();
         this.clickReturnTableRoom();
+    }
+
+    loadData() {
+        const data = {
+            name: 1
+        }
+
+        const url = "http://localhost:3001/dashboard/tables";
+        fetch(url, {
+            method: "GET",
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            redirect: "follow",
+            referrer: "no-referrer",
+        }).then(response => response.json())
+            .then(data => {
+                data[0].map((value, key) => {
+                    this.tables.push(value);
+                });
+                data[1].map((value, key) => {
+                    this.billdetail.push(value);
+                });
+
+                this.setState({
+                    isLoading: 'false'
+                });
+            })
     }
 
     addTable() {
@@ -49,52 +84,57 @@ export default class Tables extends Component {
             this.HideAllSelection();
             this.tablesRoom.style.display = "inline";
             this.tableDetail.style.display = "block";
-            this.FormAddFood[0].style.display = "none";
-            this.FormPayment[0].style.display = "none";
         }.bind(this));
     }
 
-    // neet edit
-    clickAddFoodAndPayment() {
-        this.homeTables = this.rightTables.getElementsByClassName('home-table');
-        for (let i = 0; i < this.homeTables.length - 1; i++) {
-            let btnAdd = this.homeTables[i].getElementsByClassName("select-add");
-            let btnPayment = this.homeTables[i].getElementsByClassName("select-payment");
-            btnAdd[0].addEventListener('click', function () {
-                this.tablesRoom.style.display = "none";
-                this.tableDetail.style.display = "none";
-                this.FormAddFood[0].style.display = "inline";
-                this.FormPayment[0].style.display = "none";
-            }.bind(this));
-
-            btnPayment[0].addEventListener('click', function () {
-                let txtIDTablePayment = this.FormPayment[0].getElementsByClassName('detail-txtIDTable');
-                let IDTable = this.homeTables[i].getElementsByClassName('idTable');
-                txtIDTablePayment[0].innerHTML = IDTable[0].innerHTML;
-                this.tablesRoom.style.display = "none";
-                this.tableDetail.style.display = "none";
-                this.FormAddFood[0].style.display = "none";
-                this.FormPayment[0].style.display = "inline";
-            }.bind(this));
-        }
-    }
-
-    setIdTableChange(id) {
-        this.state.idTableNow = id;
-    }
-
-    reRender(){
+    reRender() {
         this.setState({
             reload: 2
         })
     }
 
     HideAllSelection() {
-        this.homeTables = this.rightTables.getElementsByClassName('home-table');
-        for (let i = 0; i < this.homeTables.length - 1; i++) {
-            let tablesSelection = this.homeTables[i].getElementsByClassName('tables-selection');
-            tablesSelection[0].style.display = "none";  // cho ẩn selection đi hết
+        if (this.state.isLoading === "false") {
+            this.homeTables = this.rightTables.getElementsByClassName('home-table');
+            for (let i = 0; i < this.homeTables.length - 1; i++) {
+                let tablesSelection = this.homeTables[i].getElementsByClassName('tables-selection');
+                tablesSelection[0].style.display = "none";
+            }
         }
+    }
+
+    renderTable() {
+        return this.tables.map((value, key) => {
+            return (
+                <ATable HideAllSelection={this.HideAllSelection.bind(this)} postData={this.getData.bind(this)} id={value.id} status={value.status} key={key} changing={this.state.changing} />
+            )
+        })
+    }
+
+    getData(id, status) {
+        this.tableClicked.id_table = id;
+        this.tableClicked.status = status;
+        this.reRender();
+    }
+
+    renderBillDetail() {
+        return this.billdetail.map((value, key) => {
+            if (value.id_table === this.tableClicked.id_table) {
+                console.log(value);
+                return (
+                    <tr key={key}>
+                        <td>{value.food_name}</td>
+                        <td>{value.food_count}</td>
+                    </tr>
+                )
+            }
+        })
+    }
+
+    renderBillID() {
+        return (
+            <div className="txtIDTable">{this.tableClicked.id_table}</div>
+        )
     }
 
     render() {
@@ -103,11 +143,7 @@ export default class Tables extends Component {
                 <div id="right-tables">
                     <div id="tables-room" ref="tablesRoom">
                         {
-                            db.map((value, key) => {
-                                return (
-                                    <ATable funcIdTable={this.setIdTableChange.bind(this)} id={value.id} status={value.status} key={key} changing={this.state.changing} />
-                                )
-                            })
+                            this.state.isLoading === 'false' ? this.renderTable() : <div></div>
                         }
                         <div className="home-table" id="home-table-add">
                             <div className="txtAdd">+</div>
@@ -121,12 +157,12 @@ export default class Tables extends Component {
                         <div className="date">
                             <i className="fa fa-calendar-check-o" aria-hidden="true" style={{ position: "absolute", left: "3px", marginTop: '12px', color: '#1f67af' }}></i>
                             <div className="lblDate">Ngày tháng</div>
-                            <div className="txtDate">111</div>
+                            <div className="txtDate">{this.date}</div>
                         </div>
                         <div className="idTable">
                             <i className="fa fa-key" aria-hidden="true" style={{ position: "absolute", left: "3px", marginTop: '12px', color: '#b2ad9b' }}></i>
                             <div className="lblIDTable">ID bàn</div>
-                            <div className="txtIDTable">1</div>
+                            {this.renderBillID()}
                         </div>
                         <div className="table-detail-menu">
                             <table>
@@ -135,24 +171,11 @@ export default class Tables extends Component {
                                         <th>Tên món</th>
                                         <th>Số lượng</th>
                                     </tr>
-                                    <tr>
-                                        <td>asdasdsdasdasdasasdasdsdasdasdasasdasdsdasdasdasasdasdsdasdasdasasdasdsdasdasdasasdasdsdasdasdasasdasdsdasdasdasasdasdsdasdasdas</td>
-                                        <td>12</td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
+                                    {this.renderBillDetail()}
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <TablesAddFood />
-                    <TablesPayment />
                 </div>
             </div>
         )

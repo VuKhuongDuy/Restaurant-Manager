@@ -25,7 +25,7 @@ export default class Header extends Component {
         return (
             <div className="header">
                 <div className="header-logo">
-                    <img src="../img/logo.png" alt="logo" />
+                    <img src="../../../img/logo.png" alt="logo" />
                 </div>
                 <div className="header-title">
                     <div>Royal Restaurant</div>

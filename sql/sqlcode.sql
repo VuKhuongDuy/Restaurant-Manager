@@ -1,4 +1,4 @@
-use restaurant;
+﻿use restaurant;
 
 CREATE TABLE MyTable
 (
@@ -13,6 +13,7 @@ CREATE TABLE Bill
     id_table INT NOT NULL,
     check_date DATE NOT NULL,
     total_cost INT NOT NULL,
+    payment varchar(10) not null,
     
     PRIMARY KEY (id),
     CONSTRAINT fk_id_table
@@ -57,12 +58,25 @@ CREATE TABLE BillDetail
 	REFERENCES Food(id)
 );
 
-CREATE TABLE user
+CREATE TABLE Account
 (
 	user_account VARCHAR(50) NOT NULL,
     user_password VARCHAR(50) NOT NULL,
     
     PRIMARY KEY (user_account, user_password)
+);
+
+
+CREATE TABLE Employ_work
+(
+    id INT NOT NULL,
+    working NVARCHAR(50),
+    countleave INT,
+    
+    PRIMARY KEY (id),
+    CONSTRAINT fk_id_employee
+    FOREIGN KEY(id)
+    REFERENCES Employee(id)
 );
 
 insert into MyTable(statusNow)
@@ -87,19 +101,21 @@ values
 ("6","Mì gà","35000"),
 ("7","Pizza","60000");
 
-INSERT INTO user(user_account,user_password)
+INSERT INTO Account(user_account,user_password)
 values 
 ("vuduy","manunited"),
 ("manager","12345678");
 
-INSERT INTO Bill(id_table,check_date,total_cost)
+INSERT INTO Bill(id_table,check_date,total_cost,payment)
 VALUES 
-(2,"2019-03-26",1200000),
-(3,"2019-03-27",900000),
-(1,"2019-03-21",1200000),
-(5,"2019-02-26",100000),
-(4,"2019-03-26",2300000),
-(6,"2019-03-26",100000);
+(2,"2019-03-26",1200000,'yes'),
+(3,"2019-03-27",900000,'no'),
+(1,"2019-03-21",1200000,'yes'),
+(5,"2019-02-26",100000,'yes'),
+(4,"2019-03-26",2300000,'yes'),
+(6,"2019-03-26",100000,'yes'),
+(7,"2019-03-26",100000,'yes'),
+(9,"2019-03-26",100000,'yes');
 
 INSERT INTO BillDetail(id,id_food,food_count)
 VALUES 
@@ -121,9 +137,10 @@ VALUES
 (5,"Abraham Trump","male","1980-05-23","0564561231",8000000,0);
 
 
-
-
-
-
-
-
+INSERT INTO Employ_work(id,working,countleave)
+VALUES 
+(1,"Quản lí",0),
+(2,"Đầu bếp",0),
+(3,"Đầu bếp",1),
+(4,"Phục vụ",2),
+(5,"Phục vụ",2);
