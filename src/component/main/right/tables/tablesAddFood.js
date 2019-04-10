@@ -22,9 +22,6 @@ export default class TablesAddFood extends Component {
     }
 
     loadData(){
-        const data = {
-            name:1
-        }
 
         const url = "http://localhost:3001/dashboard/tables/addfood/2";
         fetch(url,{

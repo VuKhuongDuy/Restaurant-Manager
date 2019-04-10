@@ -96,7 +96,7 @@ class Login extends Component {
                         secondParam: txtNewPassword
                     }
                 })
-            });
+            })
             this.setState({
                 reset: 3
             });
@@ -108,6 +108,7 @@ class Login extends Component {
         const { redirectToReferrer } = this.state
 
         if (redirectToReferrer === "true") {
+            console.log('asd');
             return <Redirect to="/dashboard"/>
         }
         else return (

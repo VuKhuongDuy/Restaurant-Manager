@@ -39,7 +39,7 @@ class Employees extends Component {
 
     removeEmployee(id) {
         this.ListEmployee.map((value, key) => {
-            if (value.id == id) {
+            if (value.id === id) {
                 this.ListEmployee.splice(key, 1);
                 this.reRender();
                 return true;
@@ -52,7 +52,7 @@ class Employees extends Component {
             const modalEdit = document.getElementById('modalEditEmployee');
             let input = modalEdit.getElementsByClassName('form-control');
             this.ListEmployee.map((value, key) => {
-                if (value.id == input[0].value) {
+                if (value.id === input[0].value) {
                     value.hoten = input[1].value;
                     value.ngaysinh = input[2].value;
                     value.vaitro = input[3].value;

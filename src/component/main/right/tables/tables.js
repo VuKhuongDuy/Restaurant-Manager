@@ -37,10 +37,6 @@ export default class Tables extends Component {
     }
 
     loadData() {
-        const data = {
-            name: 1
-        }
-
         const url = "http://localhost:3001/dashboard/tables";
         fetch(url, {
             method: "GET",
@@ -60,6 +56,9 @@ export default class Tables extends Component {
                 data[1].map((value, key) => {
                     this.billdetail.push(value);
                 });
+
+                console.log("-----"+this.tables);
+                console.log(this.billdetail);
 
                 this.setState({
                     isLoading: 'false'

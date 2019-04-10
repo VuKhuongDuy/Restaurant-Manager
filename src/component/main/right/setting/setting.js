@@ -34,7 +34,7 @@ class Setting extends Component {
         return (
             <div>
                 <div className="form-SettingAccount">
-                    <img src="../img/locker.png" style={{ width: "430px", height: "auto", position: "absolute", right: "0px", top: "300px", opacity: "0.2" }} />
+                    <img src="../img/locker.png" alt="baomat" style={{ width: "430px", height: "auto", position: "absolute", right: "0px", top: "300px", opacity: "0.2" }} />
                     <div id="title-setting">
                         <i className="fa fa-wrench" id="title-setting" aria-hidden="true">  Thiết lập mật khẩu</i>
                     </div>

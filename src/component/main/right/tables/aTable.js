@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, NavLink,Switch } from "react-router-dom";
-import TablesAddFood from './tablesAddFood'
-import TablesPayment from './tablesPayment'
+import { BrowserRouter as NavLink } from "react-router-dom";
 
 class ATable extends Component {
     constructor(props){

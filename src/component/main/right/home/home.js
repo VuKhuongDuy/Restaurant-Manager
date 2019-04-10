@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import ATable from './ATable'
-import db from '../Json/table.json'
 
 // export const wrapper = (props) => {
 //     return this.props.data.map((value, key) => (
@@ -23,18 +22,11 @@ export default class Home extends Component {
         this.loadData();
     }
 
-    componentWillMount() {
-    }
-
     componentDidMount() {
         console.log('home-didmount');
     }
 
     loadData() {
-        const data = {
-            name: 1
-        }
-
         const url = "http://localhost:3001/dashboard";
         fetch(url, {
             method: "GET",

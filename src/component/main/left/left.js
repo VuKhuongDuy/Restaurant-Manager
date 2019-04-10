@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
-import Tables from '../left/left'
+import { BrowserRouter as NavLink } from "react-router-dom";
 export default class Left extends Component {
     constructor(props) {
         super(props);

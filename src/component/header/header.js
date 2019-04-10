@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
+import { BrowserRouter as NavLink } from "react-router-dom";
+
 
 export default class Header extends Component {
     constructor(props) {
@@ -12,20 +13,24 @@ export default class Header extends Component {
 
     clickSetting() {
         let formSetting = this.refs.form_setting;
-        if (this.state.setting == "false") {
+        if (this.state.setting === "false") {
             formSetting.style.display = "block";
-            this.state.setting = "true";
-        } else if (this.state.setting == "true") {
+            this.state({
+                setting:"true"
+            })
+        } else if (this.state.setting === "true") {
             formSetting.style.display = "none";
-            this.state.setting = "false";
+            this.setState({
+                setting: "false"
+            })
         }
     }
-    
+
     render() {
         return (
             <div className="header">
                 <div className="header-logo">
-                    <img src="../../../img/logo.png" alt="logo" />
+                    <img src="../../../img/logo.png" alt="logo" href="/"/>
                 </div>
                 <div className="header-title">
                     <div>Royal Restaurant</div>
@@ -39,7 +44,7 @@ export default class Header extends Component {
                             <li ref="setting" className="li li-setting">
                                 <NavLink to="/dashboard/setting">Đổi mật khẩu</NavLink>
                             </li>
-                            <li ref="logout" className="li li-logout">
+                            <li ref="logout" className="li li-logout" >
                                 <a href="http://localhost:3000/">Đăng xuất</a>
                             </li>
                         </div>
