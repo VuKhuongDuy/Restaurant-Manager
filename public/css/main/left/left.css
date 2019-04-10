@@ -18,6 +18,7 @@
     height: 50px;
     border-bottom: 1px solid gray;
     line-height: 20px;
+    text-align: center;
 }
 
 .left-selecter{
