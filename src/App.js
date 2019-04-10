@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
-import MyRoute from './component/login/login'
+import Authentica from './component/login/login'
 import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
 
 class App extends Component {
   render() {
     return (
-      <Router>
-        <MyRoute />
-      </Router>
+      <div className="App">
+        <Router>
+          <Authentica/>
+        </Router>
+      </div>
     );
   }
 }

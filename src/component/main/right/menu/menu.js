@@ -76,7 +76,7 @@ class Menu extends Component {
     AddDish_chooseImage() {
         this.fileNewDishImage.addEventListener('change', function () {
             var arr = this.fileNewDishImage.value.split('\\');
-            if (this.state.tab === "Food")
+            if (this.state.tab == "Food")
                 this.imgNewDish.src = "./img/ListFood/" + arr[arr.length - 1];
             else
                 this.imgNewDish.src = "./img/ListFruice/" + arr[arr.length - 1];

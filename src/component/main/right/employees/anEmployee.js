@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import db from '../Json/employees.json';
 
 class AnEmployee extends Component {
     componentDidMount() {

@@ -7,17 +7,17 @@ class Login extends Component {
         super(props);
 
         this.users = [];
-        this.loadData();
         this.account = "";
         this.password = "";
 
         this.state = {
-            reset: 1,
+            reset: 1 ,
             redirectToReferrer: "false"
         }
     }
 
     loadData() {
+        this.users.splice();
         const url = "http://localhost:3001/";
         fetch(url, {
             method: 'GET',
@@ -96,7 +96,7 @@ class Login extends Component {
                         secondParam: txtNewPassword
                     }
                 })
-            })
+            });
             this.setState({
                 reset: 3
             });
@@ -104,13 +104,14 @@ class Login extends Component {
     }
 
     render() {
+        this.loadData();
         const { from } = this.props.location.state || { from: { pathname: '/dashboard' } }
         const { redirectToReferrer } = this.state
 
         if (redirectToReferrer === "true") {
-            console.log('asd');
             return <Redirect to="/dashboard"/>
         }
+        
         else return (
                 <div id="Login">
                     <div className="Login-BackGround">
@@ -175,7 +176,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     ))}/>
 )
 
-export default function MyRoute() {
+export default function Authentica() {
     return (
         <Router>
             <div>
