@@ -10,22 +10,26 @@ import Employees from "./main/right/employees/employees"
 import Home from "./main/right/home/home"
 import History from './main/right/history/history.js'
 import Footer from './footer/footer';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
+import { BrowserRouter as Redirect, Route, Switch } from "react-router-dom";
 
 class MyRouter extends Component {
+    constructor(props) {
+        super(props);
+        this.user = 'manager'
+    }
+
     render() {
         return (
             <div>
-                <Header />
+                <Header user={this.user} />
                 <div>
                     <Left />
-                    <div id="main-right" style={{position:"relative"}}>
+                    <div id="main-right" style={{ position: "relative" }}>
                         <div className="main-right-header"></div>
                         <Route path="/dashboard/setting" component={Setting} />
                         <Switch>
                             <Route path="/dashboard/tables/addfood/:id" component={TablesAddFood} />
-                            <Route path="/dashboard/tables/payment" component={TablesPayment} />
+                            <Route path="/dashboard/tables/payment/:id" component={TablesPayment} />
                             <Route exact path="/dashboard/tables/" component={Tables} />
                         </Switch>
                         <Route path="/dashboard/menu" component={Menu} />

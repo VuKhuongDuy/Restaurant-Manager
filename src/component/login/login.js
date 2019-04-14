@@ -17,7 +17,8 @@ class Login extends Component {
     }
 
     loadData() {
-        this.users.splice();
+        this.users = [];
+
         const url = "http://localhost:3001/";
         fetch(url, {
             method: 'GET',
@@ -105,11 +106,16 @@ class Login extends Component {
 
     render() {
         this.loadData();
-        const { from } = this.props.location.state || { from: { pathname: '/dashboard' } }
+
+        var url = "/dashboard/";
+        // const { from } = this.props.location.state || { from: { pathname: url } }
+        const from = {
+            pathname: url
+        }
         const { redirectToReferrer } = this.state
 
         if (redirectToReferrer === "true") {
-            return <Redirect to="/dashboard"/>
+            return <Redirect to={from}/>
         }
         
         else return (
@@ -117,8 +123,8 @@ class Login extends Component {
                     <div className="Login-BackGround">
                         <div className="background-up"></div>
                         <div className="background-down">
-                            <img className="img1" src="../img/cheef1.jpg" alt="cheef1" />
-                            <img className="img2" src="../img/cheef2.jpg" alt="cheef2" />
+                            <img className="img1" src="../../../img/cheef1.jpg" alt="cheef1" />
+                            <img className="img2" src="../../../img/cheef2.jpg" alt="cheef2" />
                         </div>
                     </div>
                     <div className="Login-Form" ref="login_form">
@@ -169,10 +175,15 @@ const fakeAuth = {
 }
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route {...rest} render={(props => (
+    <Route {...rest} render={((props) => (
         fakeAuth.isAuthenticated === true
-            ? <Component {...props} />
-            : <Redirect to={{ pathname: '/' }} />
+            ? <Component {...props}/>
+            : <Redirect to={{ 
+                pathname: '/',
+                state:{ 
+                    from : props.location
+                }
+            }} />
     ))}/>
 )
 

@@ -31,7 +31,7 @@ export default class Header extends Component {
                     <div>Royal Restaurant</div>
                 </div>
                 <div className="header-user">
-                    <div id="header-user-name">Vũ Duy</div>
+                    <div id="header-user-name">{this.props.user}</div>
                     <div id="header-user-setting">
                         <i className="fa fa-cog" aria-hidden="true"></i>
                         <i className="fa fa-caret-down btn-setting" ref="btn-setting" onClick={this.clickSetting.bind(this)}></i>

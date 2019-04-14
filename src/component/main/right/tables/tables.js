@@ -1,42 +1,44 @@
 import React, { Component } from 'react'
 import ATable from './aTable'
-import db from '../Json/table.json'
 
 export default class Tables extends Component {
     constructor(props) {
         super(props);
 
+        this.init();
         this.state = {
             changing: "false",
             idTableNow: "0",
             reload: "0",
             isLoading: "true"
         };
-
-        this.now = new Date();
-        this.date = this.now.getDate() + "/" + this.now.getMonth() + "/" + this.now.getFullYear();
-        this.tables = [];
-        this.billdetail = [];
         this.tableClicked = {
             id_table: 0,
             status: 'empty'
         }
+
         this.loadData();
     }
 
+    init(){
+        this.now = new Date();
+        this.date = this.now.getDate() + "/" + this.now.getMonth() + "/" + this.now.getFullYear();
+        this.tables = [];
+        this.billdetail = [];
+    }
+
     componentDidMount() {
-        console.log('table did mount');
         this.rightTables = document.getElementById('right-tables');
         this.tableDetail = this.refs.Detail;
         this.btnChangeTable = this.rightTables.getElementsByClassName('select-change');
         this.tablesRoom = this.refs.tablesRoom;
         this.leftLink = document.getElementsByClassName('left-link');
         this.TablesLeft = this.leftLink[1];
-        this.addTable();
         this.clickReturnTableRoom();
     }
 
     loadData() {
+        this.init();
         const data = {
             name: 1
         }
@@ -67,16 +69,29 @@ export default class Tables extends Component {
             })
     }
 
+    postData(url) {
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({})
+        });
+        this.setState({
+            reset: 3
+        });
+    }
+
+    setTableClicked(id, status) {
+        this.tableClicked.id_table = id;
+        this.tableClicked.status = status;
+        this.reRender();
+    }
+
     addTable() {
-        let btnAdd = document.getElementById('home-table-add');
-        btnAdd.addEventListener('click', function () {
-            var newTable = {
-                id: db[db.length - 1].id + 1,
-                status: 'false'
-            };
-            db.push(newTable);
-            this.reRender();
-        }.bind(this))
+        this.postData("http://localhost:3001/dashboard/tables");
+        this.loadData();
     }
 
     clickReturnTableRoom() {
@@ -85,12 +100,6 @@ export default class Tables extends Component {
             this.tablesRoom.style.display = "inline";
             this.tableDetail.style.display = "block";
         }.bind(this));
-    }
-
-    reRender() {
-        this.setState({
-            reload: 2
-        })
     }
 
     HideAllSelection() {
@@ -103,24 +112,23 @@ export default class Tables extends Component {
         }
     }
 
+    reRender() {
+        this.setState({
+            reload: 2
+        })
+    }
+    
     renderTable() {
         return this.tables.map((value, key) => {
             return (
-                <ATable HideAllSelection={this.HideAllSelection.bind(this)} postData={this.getData.bind(this)} id={value.id} status={value.status} key={key} changing={this.state.changing} />
+                <ATable HideAllSelection={this.HideAllSelection.bind(this)} setTableClicked={this.setTableClicked.bind(this)} id={value.id} status={value.status} key={key} changing={this.state.changing} />
             )
         })
-    }
-
-    getData(id, status) {
-        this.tableClicked.id_table = id;
-        this.tableClicked.status = status;
-        this.reRender();
     }
 
     renderBillDetail() {
         return this.billdetail.map((value, key) => {
             if (value.id_table === this.tableClicked.id_table) {
-                console.log(value);
                 return (
                     <tr key={key}>
                         <td>{value.food_name}</td>
@@ -145,7 +153,7 @@ export default class Tables extends Component {
                         {
                             this.state.isLoading === 'false' ? this.renderTable() : <div></div>
                         }
-                        <div className="home-table" id="home-table-add">
+                        <div className="home-table" id="home-table-add" onClick={this.addTable.bind(this)}>
                             <div className="txtAdd">+</div>
                             <div className="opacity"></div>
                         </div>

@@ -51,7 +51,6 @@
 
 .title{
     margin-top: 10px;
-    margin-left: 148px;
     font-size: 26px;
     color: #240468;
 }
@@ -99,7 +98,6 @@
     font-size: 18px;
     font-weight: bold;
     margin-top: 184px;
-    margin-left: 73px;
     border-radius: 2%;
     border: 1px solid #8080ff;
     box-shadow: black 0px 1px 2px;
@@ -120,7 +118,6 @@
     font-size: 18px;
     font-weight: bold;
     margin-top: 53px;
-    margin-left: 73px;
     border-radius: 2%;
     border: 1px solid #8080ff;
     box-shadow: black 0px 1px 2px;

@@ -18,6 +18,20 @@ class ATable extends Component {
         this.clickTable();
     }
     
+    postData(data){
+        const url= "http://localhost:3001/dashboard/tables/put";
+        fetch(url,{
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({data}),
+        }).then(res => res.json())
+        .then(response => console.log('success', JSON.stringify(response)))
+        .catch(err => console.error('Error', err));
+    }
+
     tableImg() {
         if (this.props.status === "empty")
             return <img src="../img/table-no.png" alt="table" className="home-room-img" />
@@ -34,6 +48,10 @@ class ATable extends Component {
         }
     }
 
+    clickAddFood(){
+        this.postData(this.props.id);
+    }
+
     clickTable(){  
         const table = this.refs.table;
         table.addEventListener('click',function(){
@@ -46,11 +64,24 @@ class ATable extends Component {
                 select.style.display = "none";
                 this.state.click = "open";
             }
-            this.props.postData(this.props.id,this.props.status);
+            this.props.setTableClicked(this.props.id,this.props.status);
         }.bind(this));
     }
 
+    func(){
+        console.log('func');
+    }
+
     render() {
+        // const location_addFood = {
+        //     pathname: this.urlAddFood,
+        //     state: {data: this.bill}
+        // }
+        // const location_payment = {
+        //     pathname: this.urlPayment,
+            
+        // }
+
         return (
             <div className="home-table" ref="table">
                 <div style={{ float: 'left' }}>
@@ -59,7 +90,7 @@ class ATable extends Component {
                 </div>
                 <div className="tables-selection" ref='selection'>
                     <li className="select select-add" id="selection-addTable" onClick={this.props.addFood}>
-                        <NavLink to={this.urlAddFood}>
+                        <NavLink to={this.urlAddFood} onClick={this.clickAddFood.bind(this)}>
                             <i className="fa fa-plus" aria-hidden="true" style={{ color: 'green', float: 'left', marginTop: '5px' }}></i>
                             <div>Gọi món</div>
                         </NavLink>
@@ -71,13 +102,12 @@ class ATable extends Component {
                         </div>
                     </li>
                     <li className="select select-payment" id="selection-Payment" onClick={this.props.payment}>
-                        <NavLink to="/dashboard/tables/payment" >
+                        <NavLink to={this.urlPayment} >
                             <i className="fa fa-credit-card-alt" aria-hidden="true" style={{ color: 'red', float: 'left', marginTop: '5px' }}></i>
                             <div>Thanh toán</div>
                         </NavLink>
                     </li>
                 </div>
-
             </div>
         );
     }
