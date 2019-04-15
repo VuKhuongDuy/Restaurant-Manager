@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MyRouter from '../myrouter';
+import App from '../../App'
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 class Login extends Component {
@@ -58,6 +59,7 @@ class Login extends Component {
         if (count === 0) {
             alert('Tài khoản hoặc mật khẩu không hợp lệ');
         } else {
+            App.haveToLogin = 'false';
             fakeAuth.authenticate(() => {
                 this.setState(() => ({
                     redirectToReferrer: "true"
@@ -160,7 +162,7 @@ class Login extends Component {
     }
 }
 
-const fakeAuth = {
+export const fakeAuth = {
     isAuthenticated: false,
     authenticate(cb) {
         this.isAuthenticated = true;
@@ -174,7 +176,7 @@ const fakeAuth = {
     }
 }
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
+export const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={((props) => (
         fakeAuth.isAuthenticated === true
             ? <Component {...props}/>
@@ -187,13 +189,18 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     ))}/>
 )
 
-export default function Authentica() {
-    return (
-        <Router>
-            <div>
-                <Route path="/" component={Login} />
-                <PrivateRoute path='/dashboard' component={MyRouter} />
-            </div>
-        </Router>
-    )
+export default class Authentica extends Component {
+    render(){
+        return (
+            <Router>
+                <div>
+                    <Route path="/" component={Login} />
+                    {
+                        this.props.haveToLogin === 'true' ? <PrivateRoute path='/dashboard' component={MyRouter} /> :
+                                                <Route path='/dashboard' component={MyRouter} />                           
+                    }
+                </div>
+            </Router>
+        )
+    }
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import App from '../../App'
 import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
 
 export default class Header extends Component {
@@ -21,7 +22,12 @@ export default class Header extends Component {
         }
     }
     
+    clickLogOut(){
+        App.haveToLogin = 'true'
+    }
+
     render() {
+        console.log(App.haveToLogin)
         return (
             <div className="header">
                 <div className="header-logo">
@@ -40,7 +46,7 @@ export default class Header extends Component {
                                 <NavLink to="/dashboard/setting">Đổi mật khẩu</NavLink>
                             </li>
                             <li ref="logout" className="li li-logout">
-                                <a href="http://localhost:3000/">Đăng xuất</a>
+                                <a href="http://localhost:3000/" onClick={this.clickLogOut.bind(this)}>Đăng xuất</a>
                             </li>
                         </div>
                     </div>

@@ -3,7 +3,7 @@
 CREATE TABLE MyTable
 (
 	id INT NOT NULL AUTO_INCREMENT,
-	statusNow VARCHAR(25) NOT NULL,
+	status VARCHAR(25) NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -24,10 +24,11 @@ CREATE TABLE Bill
 CREATE TABLE Food
 (
 	id INT NOT NULL,
+	category varchar(20)
     food_name NVARCHAR(100),
     food_price INT,
     
-    PRIMARY KEY (id)
+    PRIMARY KEY (id,category)
 );
 
 CREATE TABLE Employee
@@ -79,7 +80,7 @@ CREATE TABLE Employ_work
     REFERENCES Employee(id)
 );
 
-insert into MyTable(statusNow)
+insert into MyTable(status)
 values 
 ("empty"),
 ("empty"),
@@ -91,15 +92,32 @@ values
 ("empty"),
 ("notempty");
 
-INSERT INTO food(id,food_name,food_price)
+INSERT INTO food(id,category,food_name,food_price)
 values 
-("1","Gà rán","30000"),
-("2","Bít tết","200000"),
-("3","Bò hầm","100000"),
-("4","Bún bò","30000"),
-("5","Mực xào","80000"),
-("6","Mì gà","35000"),
-("7","Pizza","60000");
+("1","food","Gà rán","30000"),
+("2","food","Bít tết","200000"),
+("3","food","Bò hầm","100000"),
+("4","food","Bún bò","30000"),
+("5","food","Mực xào","80000"),
+("6","food","Mì gà","35000"),
+("7","food","Pizza","60000"),
+("8","food","Giò heo hầm ngải","80000"),
+("9","food","Dê nướng","100000"),
+("10","food","Lẩu thái","150000"),
+("11","food","Lẩu gà","180000"),
+("12","food","Cá nướng","90000"),
+("13","food","Mực nướng","140000"),
+("1","drinks","Cafe","30000"),
+("2","drinks","CoCaCoLa","10000"),
+("3","drinks","Cam vắt","25000"),
+("4","drinks","Nước dưa hấu","20000"),
+("5","drinks","Sữa chua dầm quả","20000"),
+("6","drinks","Nước bưởi","20000"),
+("7","drinks","Nước mía","10000"),
+("8","drinks","Soda","10000"),
+("9","drinks","Trà mộc","30000"),
+("10","drinks","Sâm panh","200000"),
+("11","drinks","Rượu nho","500000"),
 
 INSERT INTO Account(user_account,user_password)
 values 

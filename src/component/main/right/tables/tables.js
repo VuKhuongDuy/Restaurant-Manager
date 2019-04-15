@@ -8,7 +8,7 @@ export default class Tables extends Component {
         this.init();
         this.state = {
             changing: "false",
-            idTableNow: "0",
+            idTableNow: 0,
             reload: "0",
             isLoading: "true"
         };
@@ -121,7 +121,7 @@ export default class Tables extends Component {
     renderTable() {
         return this.tables.map((value, key) => {
             return (
-                <ATable HideAllSelection={this.HideAllSelection.bind(this)} setTableClicked={this.setTableClicked.bind(this)} id={value.id} status={value.status} key={key} changing={this.state.changing} />
+                <ATable HideAllSelection={this.HideAllSelection.bind(this)} setTableClicked={this.setTableClicked.bind(this)} tables={this.tables} id={value.id} status={value.status} key={key}/>
             )
         })
     }
