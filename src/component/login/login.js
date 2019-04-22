@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MyRouter from '../myrouter';
 import App from '../../App'
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
 
 class Login extends Component {
     constructor(props) {
@@ -12,7 +12,7 @@ class Login extends Component {
         this.password = "";
 
         this.state = {
-            reset: 1 ,
+            reset: 1,
             redirectToReferrer: "false"
         }
     }
@@ -73,7 +73,7 @@ class Login extends Component {
         let txtNewPassword = this.refs.txtNewPassword.value.trim();
         let accountExit = 'true';
 
-        if(txtNewUser.length === 0 || txtNewPassword.length === 0){
+        if (txtNewUser.length === 0 || txtNewPassword.length === 0) {
             accountExit = 'false';
             alert('Hãy điền đầy đủ thông tin');
         }
@@ -117,47 +117,47 @@ class Login extends Component {
         const { redirectToReferrer } = this.state
 
         if (redirectToReferrer === "true") {
-            return <Redirect to={from}/>
+            return <Redirect to={from} />
         }
-        
-        else return (
-                <div id="Login">
-                    <div className="Login-BackGround">
-                        <div className="background-up"></div>
-                        <div className="background-down">
-                            <img className="img1" src="../../../img/cheef1.jpg" alt="cheef1" />
-                            <img className="img2" src="../../../img/cheef2.jpg" alt="cheef2" />
-                        </div>
-                    </div>
-                    <div className="Login-Form" ref="login_form">
-                        <div className="title" ref="title_login">Login in</div>
-                        <input type="text" className="txtLogin txtUser" placeholder="User" autoFocus />
-                        <input type="password" className="txtLogin txtPassword" placeholder="Password" />
-                        <div className="forgot-password">
-                            <i className="fa fa-question-circle" style={{ marginRight: "7px" }} aria-hidden="true"></i>
-                            <a href="https://www.google.com/search?ei=2LGUXNiYA87W-Qb4kJm4Bg&q=how+to+find+my+password+on+the+web+of+V%C5%A9+Duy&oq=how+to+find+my+password+on+the+web+of+V%C5%A9+Duy&gs_l=psy-ab.3..33i160.1613.11080..11954...5.0..0.194.3729.1j25......0....1..gws-wiz.......0i71j0i203j0i22i30j0i22i10i30j33i22i29i30j33i21.eNaSd2yZGGA">Forgot Password</a>
-                        </div>
-                        <button className="btn btn-loginIn" onClick={this.login.bind(this)}>Go</button>
-                        {/* <div style={{ width: "100%", height: "1px", backgroundColor: "#4298f4", marginLeft: "0px", marginTop: "15px"}}></div> */}
-                        <hr/>
-                        <div className="form-login-up" ref="loginup_form">
-                            <div className="input-container">
-                                <i className="fa fa-user icon"></i>
-                                <input className="input-field" ref="txtNewUser" type="text" placeholder="Username" name="usrnm" />
-                            </div>
-                            <div className="input-container">
-                                <i className="fa fa-envelope icon"></i>
-                                <input className="input-field"  type="text" placeholder="Email" name="email" />
-                            </div>
 
-                            <div className="input-container">
-                                <i className="fa fa-key icon"></i>
-                                <input className="input-field" ref="txtNewPassword" type="password" placeholder="Password" name="psw" />
-                            </div>
-                        </div>
-                        <button className="btn btn-loginUp" onClick={this.clickLoginUp.bind(this)}>Log up</button>
+        else return (
+            <div id="Login">
+                <div className="Login-BackGround">
+                    <div className="background-up"></div>
+                    <div className="background-down">
+                        <img className="img1" src="../../../img/cheef1.jpg" alt="cheef1" />
+                        <img className="img2" src="../../../img/cheef2.jpg" alt="cheef2" />
                     </div>
                 </div>
+                <div className="Login-Form" ref="login_form">
+                    <div className="title" ref="title_login">Login in</div>
+                    <input type="text" className="txtLogin txtUser" placeholder="User" autoFocus />
+                    <input type="password" className="txtLogin txtPassword" placeholder="Password" />
+                    <div className="forgot-password">
+                        <i className="fa fa-question-circle" style={{ marginRight: "7px" }} aria-hidden="true"></i>
+                        <a href="https://www.google.com/search?ei=2LGUXNiYA87W-Qb4kJm4Bg&q=how+to+find+my+password+on+the+web+of+V%C5%A9+Duy&oq=how+to+find+my+password+on+the+web+of+V%C5%A9+Duy&gs_l=psy-ab.3..33i160.1613.11080..11954...5.0..0.194.3729.1j25......0....1..gws-wiz.......0i71j0i203j0i22i30j0i22i10i30j33i22i29i30j33i21.eNaSd2yZGGA">Forgot Password</a>
+                    </div>
+                    <button className="btn btn-loginIn" onClick={this.login.bind(this)}>Go</button>
+                    {/* <div style={{ width: "100%", height: "1px", backgroundColor: "#4298f4", marginLeft: "0px", marginTop: "15px"}}></div> */}
+                    <hr />
+                    <div className="form-login-up" ref="loginup_form">
+                        <div className="input-container">
+                            <i className="fa fa-user icon"></i>
+                            <input className="input-field" ref="txtNewUser" type="text" placeholder="Username" name="usrnm" />
+                        </div>
+                        <div className="input-container">
+                            <i className="fa fa-envelope icon"></i>
+                            <input className="input-field" type="text" placeholder="Email" name="email" />
+                        </div>
+
+                        <div className="input-container">
+                            <i className="fa fa-key icon"></i>
+                            <input className="input-field" ref="txtNewPassword" type="password" placeholder="Password" name="psw" />
+                        </div>
+                    </div>
+                    <button className="btn btn-loginUp" onClick={this.clickLoginUp.bind(this)}>Log up</button>
+                </div>
+            </div>
         );
     }
 }
@@ -179,26 +179,25 @@ export const fakeAuth = {
 export const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={((props) => (
         fakeAuth.isAuthenticated === true
-            ? <Component {...props}/>
-            : <Redirect to={{ 
+            ? <Component {...props} />
+            : <Redirect to={{
                 pathname: '/',
-                state:{ 
-                    from : props.location
+                state: {
+                    from: props.location
                 }
             }} />
-    ))}/>
+    ))} />
 )
 
 export default class Authentica extends Component {
-    render(){
+    render() {
         return (
             <Router>
                 <div>
-                    <Route path="/" component={Login} />
-                    {
-                        this.props.haveToLogin === 'true' ? <PrivateRoute path='/dashboard' component={MyRouter} /> :
-                                                <Route path='/dashboard' component={MyRouter} />                           
-                    }
+                    <Switch>
+                        <PrivateRoute path='/dashboard' component={MyRouter} />
+                        <Route path="/" component={Login} />
+                    </Switch>
                 </div>
             </Router>
         )

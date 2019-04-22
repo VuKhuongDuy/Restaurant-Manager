@@ -4,10 +4,10 @@ class aDish extends Component {
     render() {
         return (
             <tr>
-                <td>this.props.name</td>
-                <td>this.props.price</td>
-                <td>this.props.count</td>
-                <td>this.props.cost</td>
+                <td>{this.props.food_name}</td>
+                <td>{this.props.food_price}</td>
+                <td>{this.props.food_count}</td>
+                <td>{this.props.total_cost}</td>
             </tr>
         );
     }

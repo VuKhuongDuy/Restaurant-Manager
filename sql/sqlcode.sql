@@ -24,39 +24,37 @@ CREATE TABLE Bill
 CREATE TABLE Food
 (
 	id INT NOT NULL,
-	category varchar(20)
+	category varchar(20),
     food_name NVARCHAR(100),
     food_price INT,
     
-    PRIMARY KEY (id,category)
+    PRIMARY KEY (food_name)
 );
 
 CREATE TABLE Employee
 (
 	id INT NOT NULL,
-    employee_name NVARCHAR(100) NOT NULL,
+    name NVARCHAR(100) NOT NULL,
     sex VARCHAR(10),
     birthday DATE,
     phone VARCHAR(20),
-    salary INT,
-    count_leave INT,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE BillDetail
 (
 	id INT NOT NULL,
-    id_food INT,
+    food_name nvarchar(150),
     food_count INT,
     
-    PRIMARY KEY (id, id_food),
+    PRIMARY KEY (id, food_name),
     CONSTRAINT fk_id_Bill
     FOREIGN KEY (id)
     REFERENCES Bill(id),
     
-    CONSTRAINT fk_id_food
-	FOREIGN KEY (id_food)
-	REFERENCES Food(id)
+    CONSTRAINT fk_food_name
+	FOREIGN KEY (food_name)
+	REFERENCES Food(food_name)
 );
 
 CREATE TABLE Account
@@ -72,6 +70,7 @@ CREATE TABLE Employ_work
 (
     id INT NOT NULL,
     working NVARCHAR(50),
+    salary INT,
     countleave INT,
     
     PRIMARY KEY (id),
@@ -94,13 +93,13 @@ values
 
 INSERT INTO food(id,category,food_name,food_price)
 values 
-("1","food","Gà rán","30000"),
-("2","food","Bít tết","200000"),
-("3","food","Bò hầm","100000"),
-("4","food","Bún bò","30000"),
-("5","food","Mực xào","80000"),
-("6","food","Mì gà","35000"),
-("7","food","Pizza","60000"),
+("1","food","Bít tết","200000"),
+("2","food","Bò hầm","100000"),
+("3","food","Bún bò","30000"),
+("4","food","Mực xào","80000"),
+("5","food","Mì gà","35000"),
+("6","food","Pizza","60000"),
+("7","food","Gà rán","30000"),
 ("8","food","Giò heo hầm ngải","80000"),
 ("9","food","Dê nướng","100000"),
 ("10","food","Lẩu thái","150000"),
@@ -117,7 +116,7 @@ values
 ("8","drinks","Soda","10000"),
 ("9","drinks","Trà mộc","30000"),
 ("10","drinks","Sâm panh","200000"),
-("11","drinks","Rượu nho","500000"),
+("11","drinks","Rượu nho","500000");
 
 INSERT INTO Account(user_account,user_password)
 values 
@@ -135,16 +134,16 @@ VALUES
 (7,"2019-03-26",100000,'yes'),
 (9,"2019-03-26",100000,'yes');
 
-INSERT INTO BillDetail(id,id_food,food_count)
+INSERT INTO BillDetail(id,food_name,food_count)
 VALUES 
-(2,1,3),
-(2,2,1),
-(3,2,1),
-(4,3,5),
-(4,2,1),
-(5,5,1),
-(6,2,1),
-(6,3,1);
+(2,"Gà rán",3),
+(2,"Mực xào",1),
+(3,"Cá nướng",1),
+(4,"Rượu nho",5),
+(4,"Nước mía",1),
+(5,"Mực nướng",1),
+(6,"Bún bò",1),
+(6,"Lẩu gà",1);
 
 INSERT INTO Employee(id,employee_name,sex,birthday,phone,salary,count_leave)
 VALUES 

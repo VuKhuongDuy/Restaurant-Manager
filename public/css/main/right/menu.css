@@ -1,6 +1,7 @@
 #Menu{
     width: 100%;
-    height: 100%;
+    height: 800px;
+    overflow: auto;
 }
 
 #Menu-header{
@@ -32,15 +33,34 @@
     width: 300px;
     height: 40px;
     margin-top: 10px;
-    right: 70px;
+    right: 74px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.txt-search:hover{
+    box-shadow: black 0px 0px 6px;
+    border: 0.5px solid black;
+}
+
+.txt-search:focus{
+    box-shadow: black 0px 0px 6px;
+    border: 0.5px solid black;
 }
 
 #Menu-header .btn-Search{
+    width: 46px;
+    height: 40px;
     background-color: #ff9933;
     position: absolute;
     right: 20px;
     margin-top: 10px;
     border: 1px solid black;
+}
+
+#Menu-header .btn-Search:hover{
+    box-shadow: black 0px 0px 6px;
+    border: 0.5px solid black;
 }
 
 #Menu-main{

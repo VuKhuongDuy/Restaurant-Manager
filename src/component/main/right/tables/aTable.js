@@ -28,8 +28,7 @@ class ATable extends Component {
                 'Accept': 'application/json'
             },
             body: JSON.stringify({ data }),
-        }).then(res => res.json())
-            .then(response => console.log('success', JSON.stringify(response)))
+        }).then(response => console.log('success', JSON.stringify(response)))
             .catch(err => console.error('Error', err));
     }
 

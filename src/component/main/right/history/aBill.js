@@ -5,8 +5,7 @@ export default class ABill extends Component {
         this.props.clearClick();
         let tr = this.refs.tr;
         tr.style.backgroundColor = "#e6f2ff";
-
-        this.props.showBillDetail(this.props.id);
+        this.props.setIDBillDetail(this.props.id);
     }
 
     render() {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios';
 
 export default class TablesAddFood extends Component {
     constructor(props) {
@@ -29,61 +30,54 @@ export default class TablesAddFood extends Component {
     }
 
     loadData() {
+        console.log('load-food');
         this.init();
         const data = {
             name: 1
         }
         const url = "http://localhost:3001/dashboard/tables/addfood";
-        fetch(url, {
-            method: "GET",
-            mode: "cors",
-            cache: "no-cache",
-            credentials: "same-origin",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            redirect: "follow",
-            referrer: "no-referrer"
-        }).then(response => response.json())
-            .then(data => {
-                data.map((value, key) => {
+        axios.get(url).then(data => {
+                data.data.map((value, key) => {
                     this.foods.push(value);
                 })
+                console.log('food: '+this.foods)
                 this.reRender();
             })
     }
 
     postData(url, data) {
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-                'Accept': 'application/json',
-            },
-            body: JSON.stringify(data)
-        });
+        console.log('postadasd')
+        axios.post(url,data).then((response)=>{
+            alert('Thêm thành công')
+        }).catch((err)=>{
+            console.log('dm loi: ',err)
+        })
     }
 
     clickAcceptAddFood() {
-        var data = this.foodOrders
-        var url = "http://localhost:3001/dashboard/tables/addfood/" + this.id;
+        var data = {
+            id_table: this.id,
+            data: this.foodOrders
+        };
+        var url = "http://localhost:3001/dashboard/tables/addfood/";
         this.postData(url, data);
+        this.foodOrders = [];
     }
 
     clickOrderFood() {
-        var id_food = 0;
-
-        this.foods.map((value, key) => {
-            if (value.food_name === this.cbxListFood.value)
-                id_food = value.id
-        })
-
         var aFoodOrder = {
-            id_food: id_food,
             food_name: this.cbxListFood.value,
             count: this.nmbDishCount.value
         }
-        this.foodOrders.push(aFoodOrder);
+        let flat = 0;
+        this.foodOrders.map((value,key)=>{
+            if(value.food_name == aFoodOrder.food_name){
+                value.count = Number.parseInt(value.count) + Number.parseInt(aFoodOrder.count)
+                flat = 1
+            }
+        })
+        if(flat == 0)
+            this.foodOrders.push(aFoodOrder);
         this.reRender();
     }
 
@@ -115,7 +109,6 @@ export default class TablesAddFood extends Component {
     }
 
     render() {
-        { console.log('table add food render') }
         return (
             <div id="tables-addFood" className="form-AddFood">
                 <div className="tables-selection-header">
@@ -132,7 +125,7 @@ export default class TablesAddFood extends Component {
                                 this.state.isLoading === "false" ? this.renderfoods() : <option></option>
                             }
                         </select>
-                        <input type="number" name="quantity" min={0} max={100} placeholder="Số lượng" id="dishCount" ref="dishCount" />
+                        <input type="number" name="quantity" min={0} max={100} defaultValue={1} placeholder="Số lượng" id="dishCount" ref="dishCount" />
                         <button type="button" className="btn btn-success" ref="btnAddFood" onClick={this.clickOrderFood.bind(this)}>Gọi</button>
                     </div>
                     <div className="addFood-listFood">

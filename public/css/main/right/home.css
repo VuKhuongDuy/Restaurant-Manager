@@ -96,8 +96,24 @@
     height: 32px;
 }
 
+.thongke-table tbody{
+    width: 100%
+}
+
+.thongke-table tr{
+    width: 100%;
+}
+
 .thongke-table tbody tr td:nth-child(1){
     text-align: left;
+}
+
+#tblXephang tbody tr td:nth-child(1){
+    width: 200px;
+}
+
+#tblXephang tbody tr td:nth-child(2){
+    width: 120px;
 }
 
 .thongke-table tbody tr td:nth-child(2){

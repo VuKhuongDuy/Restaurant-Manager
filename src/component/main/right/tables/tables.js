@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ATable from './aTable'
+import axios from 'axios';
 
 export default class Tables extends Component {
     constructor(props) {
@@ -39,29 +40,18 @@ export default class Tables extends Component {
 
     loadData() {
         this.init();
-        const data = {
-            name: 1
-        }
-
         const url = "http://localhost:3001/dashboard/tables";
-        fetch(url, {
-            method: "GET",
-            mode: "cors",
-            cache: "no-cache",
-            credentials: "same-origin",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            redirect: "follow",
-            referrer: "no-referrer",
-        }).then(response => response.json())
-            .then(data => {
-                data[0].map((value, key) => {
+        console.log('load-table');
+        axios.get(url).then(data => {
+                console.log('load-table-1')
+                data.data[0].map((value, key) => {
+                    console.log('map1111111')
                     this.tables.push(value);
                 });
-                data[1].map((value, key) => {
+                data.data[1].map((value, key) => {
                     this.billdetail.push(value);
                 });
+                console.log('table: '+ this.tables)
 
                 this.setState({
                     isLoading: 'false'
@@ -127,16 +117,18 @@ export default class Tables extends Component {
     }
 
     renderBillDetail() {
-        return this.billdetail.map((value, key) => {
-            if (value.id_table === this.tableClicked.id_table) {
-                return (
-                    <tr key={key}>
-                        <td>{value.food_name}</td>
-                        <td>{value.food_count}</td>
-                    </tr>
-                )
-            }
-        })
+        if(this.tableClicked.status == "notempty"){
+            return this.billdetail.map((value, key) => {
+                if (value.id_table === this.tableClicked.id_table) {
+                    return (
+                        <tr key={key}>
+                            <td>{value.food_name}</td>
+                            <td>{value.food_count}</td>
+                        </tr>
+                    )
+                }
+            })
+        }
     }
 
     renderBillID() {
@@ -146,6 +138,7 @@ export default class Tables extends Component {
     }
 
     render() {
+        {console.log('table: '+this.tables)}
         return (
             <div>
                 <div id="right-tables">

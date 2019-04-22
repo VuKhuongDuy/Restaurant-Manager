@@ -149,7 +149,8 @@ export default class Home extends Component {
                                         </tr>
                                         <tr style={{ backgroundColor: 'gold' }}>
                                             <td>
-                                                {this.rank_dish_name[0]}</td>
+                                                {this.rank_dish_name[0]}
+                                            </td>
                                             <td>
                                                 <i className="fa fa-trophy" aria-hidden="true" style={{ float: 'left' }}></i>
                                                 {this.rank_dish_count[0]}

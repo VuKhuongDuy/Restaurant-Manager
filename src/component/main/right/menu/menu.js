@@ -7,15 +7,20 @@ class Menu extends Component {
         super(props)
 
         this.state = {
-            editing: "false",
+            editing: false,
             tab: "Food",
             render: 1
         }
+        this.food_name_old = ""
+        this.init();
     }
 
-    componentWillMount() {
-        this.ListDish = [];
-        this.dataFromDBToList();
+    init() {
+        this.foods = [];
+        this.drinks = [];
+        this.arrFood = [];
+        this.arrDrink = [];
+        this.loadData();
     }
 
     componentDidMount() {
@@ -33,44 +38,77 @@ class Menu extends Component {
         this.imgNewDish = this.refs.image_newDish;
         this.txtNameNewDish = this.refs.txtNewDish;
         this.txtPriceNewDish = this.refs.PriceNewDish;
-        this.acceptAddDish = this.refs.acceptAddDish;
+        // this.acceptAddDish = this.refs.acceptAddDish;
         this.clickLabelFood();
         this.AddDish_chooseImage();
-        this.clickAcceptAddDish();
-        this.clickSearch();
     }
 
-    dataFromDBToList() {
-        db.map((value, key) => {
-            let newDish = {
-                id: value.id,
-                category: value.category,
-                name: value.name,
-                price: value.price
-            };
-            this.ListDish.push(newDish);
-        });
+    loadData() {
+        fetch("http://localhost:3001/dashboard/menu", {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            redirect: 'follow',
+            referrer: 'no-referrer'
+        }).then(response => response.json())
+            .then(data => {
+                data[0].map((value, key) => {
+                    this.foods.push(value);
+                })
+                this.arrFood = this.foods;
+                data[1].map((value, key) => {
+                    this.drinks.push(value);
+                })
+                this.arrDrink = this.drinks;
+                this.reRender();
+            })
     }
 
-    clickSearch(category) { 
-        this.btnSearch.addEventListener('click', function () {
-            let strSearch = this.txtSearch.value;
-            let arrResult = [];
-            if (strSearch.length > 0) {
-                this.ListDish.forEach(aDish => {
-                    if (aDish.name.indexOf(strSearch) >= 0)
-                        arrResult.push(aDish);  
+    postData(url, data) {
+        console.log(data)
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify(data)
+        }).then(data => {
+            alert('Thay đổi thành công')
+        })
+    }
+
+    clickSearch() {
+        let strSearch = this.txtSearch.value;
+        let listDish = this.state.tab === 'Food' ? this.foods : this.drinks;
+        console.log(listDish);
+        if (strSearch.length > 0) {
+            if (this.state.tab === 'Food') {
+                this.arrFood = [];
+                listDish.forEach(aDish => {
+                    
+                    if (aDish.food_name.indexOf(strSearch) >= 0)
+                        this.arrFood.push(aDish);
+                })
+            } else {
+                this.arrDrink = [];
+                listDish.forEach(aDish => {
+                    
+                    if (aDish.food_name.indexOf(strSearch) >= 0)
+                        this.arrDrink.push(aDish);
                 });
-                this.ListDish = arrResult;
-                console.log(this.ListDish);
             }
-            else
-                this.ListDish = db;
-
-            this.setState({
-                render: 3
-            });
-        }.bind(this));
+        } else {
+            this.arrFood = this.foods;
+            this.arrDrink = this.drinks;
+        }
+        this.setState({
+            render: 3
+        });
     }
 
     AddDish_chooseImage() {
@@ -84,24 +122,33 @@ class Menu extends Component {
     }
 
     clickAcceptAddDish() {
-        this.acceptAddDish.addEventListener('click', function () {
-            if (window.confirm("Bạn có muốn thêm món này")) {
-                let dishName = this.txtNameNewDish.value;;
-                let dishPrice = this.txtPriceNewDish.value;
-                let img = this.imgNewDish.src;
-                let arr = img.split('/');
-                let ADish = {
-                    id: arr[arr.length - 1][0],
-                    category: this.state.tab,
-                    name: dishName,
-                    price: dishPrice
-                }
-                this.ListDish.push(ADish);
+        if (window.confirm("Bạn có muốn thêm món này")) {
+            let dishName = this.txtNameNewDish.value;
+            let dishPrice = this.txtPriceNewDish.value;
+            let img = this.imgNewDish.src;
+
+            let arr = img.split('/');
+            let index = arr[arr.length - 1].indexOf('.')
+            let id_food = arr[arr.length - 1].substring(0, index)
+
+            let newdish = {
+                id: id_food,
+                category: this.state.tab === 'Food' ? 'food' : 'drinks',
+                food_name: dishName,
+                food_price: dishPrice
             }
-            this.setState({
-                render: 3
-            });
-        }.bind(this))
+            let editDish = {
+                id: id_food,
+                category: this.state.tab === 'Food' ? 'food' : 'drinks',
+                food_name_New: dishName,
+                food_price: dishPrice,
+                food_name_Old: this.food_name_old
+            }
+            const urlPostNewDish = 'http://localhost:3001/dashboard/menu/new';
+            const urlPostEditDish = 'http://localhost:3001/dashboard/menu/edit';
+            this.state.editing ? this.postData(urlPostEditDish, editDish) : this.postData(urlPostNewDish, newdish)
+        }
+        this.init();
     }
 
     clickLabelFood() {
@@ -132,20 +179,24 @@ class Menu extends Component {
         }.bind(this));
     }
 
-    edit(src, name, price){
+    edit(src, name, price) {
+        this.food_name_old = name
         const image_NewDish = this.refs.image_newDish;
         const name_NewDish = document.getElementsByClassName('NewDish-txtName');
         const price_NewDish = document.getElementsByClassName('NewDish-nbmPrice');
         image_NewDish.src = src;
         name_NewDish[0].value = name;
         price_NewDish[0].value = price;
+        this.setState({
+            editing: true
+        })
     }
 
-    showListDish(listDish, category) {
+    renderDish(Dishes, category) {
+        // const countPage = (Dishes.length/8 > 0) ? (Dishes.length/8) : (Dishes.length/8+1);
         return (
-            listDish.map((value, key) => {
-                if (value.category === category)
-                    return <DishComp funcEdit = {this.edit.bind(this)} key={key} name={value.name} price={value.price} src={'../img/List' + category + "/" + value.id + ".jpg"} />
+            Dishes.map((value, key) => {
+                return <DishComp funcEdit={this.edit.bind(this)} key={key} name={value.food_name} parentInit={this.init.bind(this)} price={value.food_price} src={'../img/' + category + "/" + value.id + ".jpg"} />
             })
         )
     }
@@ -164,6 +215,12 @@ class Menu extends Component {
         }
     }
 
+    reRender() {
+        this.setState({
+            render: 1
+        })
+    }
+
     render() {
         return (
             <div id="Menu">
@@ -171,15 +228,17 @@ class Menu extends Component {
                     <div ref="tabFood" className="Menu-tab Food" >ĐỒ ĂN</div>
                     <div ref="tabFruice" className="Menu-tab Fruice" >ĐỒ UỐNG</div>
                     <input type="text" className="txt-search" ref="txtSearch" placeholder="Tìm kiếm" />
-                    <button type="button" ref="btnSearch" className="btn btn-Search">
+                    <button type="button" ref="btnSearch" className="btn btn-Search" onClick={this.clickSearch.bind(this)}>
                         <i className="fa fa-search" aria-hidden="true"></i>
                     </button>
                 </div>
                 <div id="Menu-main">
                     <div ref="MenuFood" id="Menu-Food">
-                        {
-                            this.showListDish(this.ListDish, "Food")
-                        }
+                        <div>
+                            {
+                                this.renderDish(this.arrFood, 'foods')
+                            }
+                        </div>
                         <div ref="btnAddFood">
                             <div className="btn-Add" data-toggle="modal" data-target="#modalAdd">
                                 <div className="txtAdd">+</div>
@@ -188,9 +247,11 @@ class Menu extends Component {
                         </div>
                     </div>
                     <div ref="MenuFruice" id="Menu-Fruice">
-                        {
-                            this.showListDish(this.ListDish, "Fruice")
-                        }
+                        <div>
+                            {
+                                this.renderDish(this.arrDrink, 'drinks')
+                            }
+                        </div>
                         <div ref="btnAddFruice">
                             <div className="btn-Add" data-toggle="modal" data-target="#modalAdd">
                                 <div className="txtAdd">+</div>
@@ -225,7 +286,7 @@ class Menu extends Component {
                                     </div>
                                 </div>
                                 <div className="modal-footer">
-                                    <input type="button" ref="acceptAddDish" className="btn-accept-image" value="Xác nhận" />
+                                    <input type="button" ref="acceptAddDish" className="btn-accept-image" value="Xác nhận" onClick={this.clickAcceptAddDish.bind(this)} />
                                 </div>
                             </div>{/* /.modal-content */}
                         </div>{/* /.modal-dialog */}
