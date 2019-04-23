@@ -85,19 +85,18 @@ class Menu extends Component {
     clickSearch() {
         let strSearch = this.txtSearch.value;
         let listDish = this.state.tab === 'Food' ? this.foods : this.drinks;
-        console.log(listDish);
         if (strSearch.length > 0) {
             if (this.state.tab === 'Food') {
                 this.arrFood = [];
                 listDish.forEach(aDish => {
-                    
+
                     if (aDish.food_name.indexOf(strSearch) >= 0)
                         this.arrFood.push(aDish);
                 })
             } else {
                 this.arrDrink = [];
                 listDish.forEach(aDish => {
-                    
+
                     if (aDish.food_name.indexOf(strSearch) >= 0)
                         this.arrDrink.push(aDish);
                 });
@@ -115,9 +114,9 @@ class Menu extends Component {
         this.fileNewDishImage.addEventListener('change', function () {
             var arr = this.fileNewDishImage.value.split('\\');
             if (this.state.tab == "Food")
-                this.imgNewDish.src = "./img/ListFood/" + arr[arr.length - 1];
+                this.imgNewDish.src = "../../../img/foods/" + arr[arr.length - 1];
             else
-                this.imgNewDish.src = "./img/ListFruice/" + arr[arr.length - 1];
+                this.imgNewDish.src = "../../../img/drinks/" + arr[arr.length - 1];
         }.bind(this), false);
     }
 
@@ -126,6 +125,12 @@ class Menu extends Component {
             let dishName = this.txtNameNewDish.value;
             let dishPrice = this.txtPriceNewDish.value;
             let img = this.imgNewDish.src;
+
+            if (dishName.length <= 0 || dishPrice.length <= 0 || img.length <= 0) {
+                alert('Bạn cần nhập đầy đủ thông tin!!');
+                return 'fail';
+            }
+
 
             let arr = img.split('/');
             let index = arr[arr.length - 1].indexOf('.')
@@ -179,7 +184,14 @@ class Menu extends Component {
         }.bind(this));
     }
 
+    clickButtonAdd() {
+        this.setState({
+            editing: false
+        })
+    }
+
     edit(src, name, price) {
+        console.log('src: ' + src)
         this.food_name_old = name
         const image_NewDish = this.refs.image_newDish;
         const name_NewDish = document.getElementsByClassName('NewDish-txtName');
@@ -196,7 +208,7 @@ class Menu extends Component {
         // const countPage = (Dishes.length/8 > 0) ? (Dishes.length/8) : (Dishes.length/8+1);
         return (
             Dishes.map((value, key) => {
-                return <DishComp funcEdit={this.edit.bind(this)} key={key} name={value.food_name} parentInit={this.init.bind(this)} price={value.food_price} src={'../img/' + category + "/" + value.id + ".jpg"} />
+                return <DishComp funcEdit={this.edit.bind(this)} key={key} name={value.food_name} parentInit={this.init.bind(this)} price={value.food_price} src={'../../../img/' + category + "/" + value.id + ".jpg"} />
             })
         )
     }
@@ -217,7 +229,7 @@ class Menu extends Component {
 
     reRender() {
         this.setState({
-            render: 1
+            editing: false
         })
     }
 
@@ -239,7 +251,7 @@ class Menu extends Component {
                                 this.renderDish(this.arrFood, 'foods')
                             }
                         </div>
-                        <div ref="btnAddFood">
+                        <div ref="btnAddFood" onClick={this.clickButtonAdd.bind(this)}>
                             <div className="btn-Add" data-toggle="modal" data-target="#modalAdd">
                                 <div className="txtAdd">+</div>
                                 <div className="opacity"></div>
@@ -252,10 +264,10 @@ class Menu extends Component {
                                 this.renderDish(this.arrDrink, 'drinks')
                             }
                         </div>
-                        <div ref="btnAddFruice">
-                            <div className="btn-Add" data-toggle="modal" data-target="#modalAdd">
+                        <div ref="btnAddFruice" onClick={this.clickButtonAdd.bind(this)}>
+                            <div className="btn-Add" data-toggle="modal" data-target="#modalAdd" onClick={this.clickButtonAdd.bind(this)}>
                                 <div className="txtAdd">+</div>
-                                <div className="opacity"></div>
+                                <div className="opacity" onClick={this.clickButtonAdd.bind(this)}></div>
                             </div>
                         </div>
                     </div>
@@ -276,11 +288,9 @@ class Menu extends Component {
                                         <input type="number" ref="PriceNewDish" className="NewDish-nbmPrice" name="quantity" min={0} max={10000000} placeholder="Giá" />
                                     </div>
                                     <div id="lbl-imgNewDish">
-                                        <div className="lbl NewDish-urlImage">Link của ảnh</div>
                                         <div className="lbl NewDish-chooseImg">Chọn ảnh</div>
                                     </div>
                                     <div id="input-imgNewDish">
-                                        <input type="text" className="txt-urlImage" placeholder="url of image"></input>
                                         <input type="file" ref="fileNewDishImage" id="file-newDishImage" ></input>
                                         <img ref="image_newDish" name="new Dish" className="NewDish-img" />
                                     </div>

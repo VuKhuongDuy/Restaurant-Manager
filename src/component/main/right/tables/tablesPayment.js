@@ -53,7 +53,7 @@ export default class TablesPayment extends Component {
 
     post(){
         const data = {
-            name:1
+            totalPrice:this.totalPrice
         }
         var url ='http://localhost:3001/dashboard/tables/payment/'+this.id_table;
         fetch(url, {
@@ -67,9 +67,13 @@ export default class TablesPayment extends Component {
     }
 
     clickPayment() {
-        alert('Đã thanh toán hóa đơn ở bàn số '+ this.id_table + 'số tiền là: '+this.totalPrice+'\n \
-        Bàn số '+this.id_table+' trống');
-        this.post();
+        if(this.foods.length>0){
+            alert('Đã thanh toán hóa đơn ở bàn số '+ this.id_table + 'số tiền là: '+this.totalPrice+'\n \
+            Bàn số '+this.id_table+' trống');
+            this.post();
+        }else{
+            alert('Bàn trống, không có gì để thanh toán')
+        }
     }
 
     renderFoods() {

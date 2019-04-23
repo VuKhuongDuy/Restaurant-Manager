@@ -55,13 +55,17 @@ export default class TablesAddFood extends Component {
     }
 
     clickAcceptAddFood() {
-        var data = {
-            id_table: this.id,
-            data: this.foodOrders
-        };
-        var url = "http://localhost:3001/dashboard/tables/addfood/";
-        this.postData(url, data);
-        this.foodOrders = [];
+        if(this.foodOrders.length>0){
+            var data = {
+                id_table: this.id,
+                data: this.foodOrders
+            };
+            var url = "http://localhost:3001/dashboard/tables/addfood/";
+            this.postData(url, data);
+            this.foodOrders = []; 
+        }else{
+            alert('Hãy chọn món')
+        }
     }
 
     clickOrderFood() {

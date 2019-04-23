@@ -13,15 +13,10 @@ import Footer from './footer/footer';
 import { BrowserRouter as Redirect, Route, Switch } from "react-router-dom";
 
 class MyRouter extends Component {
-    constructor(props) {
-        super(props);
-        this.user = 'manager'
-    }
-
     render() {
         return (
             <div>
-                <Header user={this.user} />
+                <Header/>
                 <div>
                     <Left />
                     <div id="main-right" style={{ position: "relative" }}>

@@ -100,7 +100,9 @@ class history extends Component {
     }
 
     DateToString(date){
-        let str = JSON.stringify(date);
+        let newDate =new Date(date);
+        let aDate = new Date(newDate.getTime()+24*60*60*1000)
+        let str = JSON.stringify(aDate);
         let index = str.indexOf('T');
         let strDate = str.substring(1,index);
         return strDate;
@@ -115,9 +117,7 @@ class history extends Component {
 
     showListBill() {
         return this.listBillWillLoaded.map((value, key) => {
-            const str = JSON.stringify(value.check_date);
-            const index = str.indexOf('T');
-            const strDate = str.substring(1, index);
+            const strDate = this.DateToString(value.check_date);
             return (
                 <ABill key={key} setIDBillDetail={this.setIDBillDetail.bind(this)} clearClick={this.clearClick.bind(this)} id={value.id} idTable={value.id_table} date={strDate} cost={value.total_cost} />
             )

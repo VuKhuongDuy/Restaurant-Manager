@@ -38,7 +38,6 @@ class Employees extends Component {
             referrer: 'no-referrer'
         }).then(response => response.json())
             .then(data => {
-                console.log(data)
                 data.map((value, key) => {
                     this.ListEmployee.push(value);
                 })
@@ -75,7 +74,16 @@ class Employees extends Component {
         if (window.confirm("Bạn có muốn thay đổi")) {
             const modalEdit = document.getElementById('modalEditEmployee');
             let input = modalEdit.getElementsByClassName('form-control');
-            let em = ""
+            let em = {
+                id:input[0].value,
+                name:"",
+                sex:"",
+                birthday:null,
+                phone:"",
+                working:"",
+                salary:0,
+                countleave:0
+            }
             for (let i = 0; i < this.ListEmployee.length; i++)
                 if (this.ListEmployee[i].id == input[0].value) {
                     em.name = input[1].value;
@@ -97,7 +105,7 @@ class Employees extends Component {
             const modalAdd = document.getElementById('modalAddEmployee');
             let input = modalAdd.getElementsByClassName('form-control');
             let newEm = {
-                id: this.ListEmployee[this.ListEmployee.length - 1].id + 1,
+                id:1,
                 name: input[1].value,
                 sex: input[2].value,
                 birthday: input[3].value,
@@ -106,6 +114,9 @@ class Employees extends Component {
                 salary: input[6].value,
                 countleave: input[7].value,
             }
+            if(typeof this.ListEmployee !== 'undefined')
+                newEm.id = this.ListEmployee[this.ListEmployee.length - 1].id + 1;
+            console.log(newEm.id)
             this.ListEmployee.push(newEm);
             this.post(newEm, url);
             this.reRender();

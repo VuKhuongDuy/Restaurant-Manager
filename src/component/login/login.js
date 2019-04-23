@@ -52,14 +52,14 @@ class Login extends Component {
             if (input[0].value === value.user_account && input[1].value === value.user_password) {
                 this.account = value.user_account;
                 this.password = value.user_password;
+
+                localStorage.setItem('user',value.id);
                 count = 1;
-                return;
             }
         })
         if (count === 0) {
             alert('Tài khoản hoặc mật khẩu không hợp lệ');
         } else {
-            App.haveToLogin = 'false';
             fakeAuth.authenticate(() => {
                 this.setState(() => ({
                     redirectToReferrer: "true"
@@ -131,8 +131,8 @@ class Login extends Component {
                 </div>
                 <div className="Login-Form" ref="login_form">
                     <div className="title" ref="title_login">Login in</div>
-                    <input type="text" className="txtLogin txtUser" placeholder="User" autoFocus />
-                    <input type="password" className="txtLogin txtPassword" placeholder="Password" />
+                    <input type="text" className="txtLogin txtUser input-field" placeholder="User" autoFocus name="usrnm" required/>
+                    <input type="password" className="txtLogin txtPassword input-field" placeholder="Password" name="psw" required/>
                     <div className="forgot-password">
                         <i className="fa fa-question-circle" style={{ marginRight: "7px" }} aria-hidden="true"></i>
                         <a href="https://www.google.com/search?ei=2LGUXNiYA87W-Qb4kJm4Bg&q=how+to+find+my+password+on+the+web+of+V%C5%A9+Duy&oq=how+to+find+my+password+on+the+web+of+V%C5%A9+Duy&gs_l=psy-ab.3..33i160.1613.11080..11954...5.0..0.194.3729.1j25......0....1..gws-wiz.......0i71j0i203j0i22i30j0i22i10i30j33i22i29i30j33i21.eNaSd2yZGGA">Forgot Password</a>
@@ -143,7 +143,7 @@ class Login extends Component {
                     <div className="form-login-up" ref="loginup_form">
                         <div className="input-container">
                             <i className="fa fa-user icon"></i>
-                            <input className="input-field" ref="txtNewUser" type="text" placeholder="Username" name="usrnm" />
+                            <input className="input-field" ref="txtNewUser" type="text" placeholder="Username"/>
                         </div>
                         <div className="input-container">
                             <i className="fa fa-envelope icon"></i>
@@ -152,7 +152,7 @@ class Login extends Component {
 
                         <div className="input-container">
                             <i className="fa fa-key icon"></i>
-                            <input className="input-field" ref="txtNewPassword" type="password" placeholder="Password" name="psw" />
+                            <input className="input-field" ref="txtNewPassword" type="password" placeholder="Password"/>
                         </div>
                     </div>
                     <button className="btn btn-loginUp" onClick={this.clickLoginUp.bind(this)}>Log up</button>
@@ -190,7 +190,14 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
 )
 
 export default class Authentica extends Component {
+    checkLogin(){
+        var strUser = localStorage.getItem('user');
+        if(strUser.length>0)
+            fakeAuth.isAuthenticated = true        
+    }
+
     render() {
+        this.checkLogin();
         return (
             <Router>
                 <div>

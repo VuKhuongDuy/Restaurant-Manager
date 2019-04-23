@@ -34,6 +34,7 @@ CREATE TABLE Food
 CREATE TABLE Employee
 (
 	id INT NOT NULL,
+	id_account int not null,
     name NVARCHAR(100) NOT NULL,
     sex VARCHAR(10),
     birthday DATE,
@@ -59,10 +60,10 @@ CREATE TABLE BillDetail
 
 CREATE TABLE Account
 (
+	id int not null AUTO_INCREMENT,
 	user_account VARCHAR(50) NOT NULL,
-    user_password VARCHAR(50) NOT NULL,
-    
-    PRIMARY KEY (user_account, user_password)
+    	user_password VARCHAR(50) NOT NULL,
+    	PRIMARY KEY (id)
 );
 
 
@@ -145,19 +146,19 @@ VALUES
 (6,"Bún bò",1),
 (6,"Lẩu gà",1);
 
-INSERT INTO Employee(id,employee_name,sex,birthday,phone,salary,count_leave)
+INSERT INTO Employee(id,id_account,name,sex,birthday,phone)
 VALUES 
-(1,"Vũ Khương Duy","male","1999-05-23","0858667208",15000000,0),
-(2,"Nguyễn Đình Huy","male","1999-02-27","032327118",5000000,1),
-(3,"Nguyễn Thị Thu Phương","female","1999-01-19","0851237223",5000000,3),
-(4,"Linda Cofield","female","1999-11-12","099118555",6000000,2),
-(5,"Abraham Trump","male","1980-05-23","0564561231",8000000,0);
+(1,1,"Vũ Khương Duy","male","1999-05-23","0858667208"),
+(2,2,"Nguyễn Đình Huy","male","1999-02-27","032327118"),
+(3,3,"Nguyễn Thị Thu Phương","female","1999-01-19","0851237223"),
+(4,4,"Linda Cofield","female","1999-11-12","099118555"),
+(5,5,"Abraham Trump","male","1980-05-23","0564561231");
 
 
-INSERT INTO Employ_work(id,working,countleave)
+INSERT INTO Employ_work(id,working,salary,countleave)
 VALUES 
-(1,"Quản lí",0),
-(2,"Đầu bếp",0),
-(3,"Đầu bếp",1),
-(4,"Phục vụ",2),
-(5,"Phục vụ",2);
+(1,"Quản lí",10000,0),
+(2,"Đầu bếp",5000,0),
+(3,"Đầu bếp",7000,1),
+(4,"Phục vụ",5000,2),
+(5,"Phục vụ",4000,2);

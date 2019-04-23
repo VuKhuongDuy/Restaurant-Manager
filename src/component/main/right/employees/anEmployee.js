@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 class AnEmployee extends Component {
     constructor(props){
         super(props);
-
-        let str = JSON.stringify(this.props.birthday);
+        let newDate =new Date(this.props.birthday);
+        let date = new Date(newDate.getTime()+24*60*60*1000)
+        let str = JSON.stringify(date);
         let index = str.indexOf('T');
         this.strDate = str.substring(1,index);
     }
