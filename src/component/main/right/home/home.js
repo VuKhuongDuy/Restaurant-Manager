@@ -114,39 +114,36 @@ export default class Home extends Component {
                             </div>
                             <div className="thongke-doanhthu">
                                 <div>
-                                    <table className="thongke-table" id="tblDoanhthu">
-                                        <tbody>
-                                            <tr style={{ fontSize: '17px', lineHeight: '40px' }}>
-                                                <th>
-                                                    <i className="fa fa-money" aria-hidden="true" style={{ marginRight: '4px', color: 'gold' }}></i>
-                                                    Doanh thu
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <td>Hôm nay: </td>
-                                                <td>
-                                                    {this.revenue[0]} đ</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Tháng này: </td>
-                                                <td>{this.revenue[1]} đ</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Năm nay: </td>
-                                                <td>{this.revenue[2]} đ</td>
-                                            </tr>
-                                        </tbody></table>
+                                    <div style={{ fontSize: '17px', lineHeight: '40px' }}>
+                                        <i className="fa fa-money" aria-hidden="true" style={{ marginRight: '4px', color: 'gold' }}></i>
+                                        Doanh thu
                                 </div>
+                                <table className="thongke-table" id="tblDoanhthu">
+                                    <tbody>
+                                        <tr>
+                                            <td>Hôm nay: </td>
+                                            <td>
+                                                {this.revenue[0]} đ</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tháng này: </td>
+                                            <td>{this.revenue[1]} đ</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Năm nay: </td>
+                                            <td>{this.revenue[2]} đ</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                             </div>
                             <div className="thongke-xephangmonan">
+                                <div style={{ lineHeight: '40px', fontSize: "17px", textAlign: "left" }}>
+                                    <i className="fa fa-thumbs-o-up" aria-hidden="true" style={{ color: 'red', marginRight: '3px' }}></i>
+                                    Hot Food
+                                </div>
                                 <table className="thongke-table" id="tblXephang">
                                     <tbody>
-                                        <tr style={{ lineHeight: '40px' }}>
-                                            <th>
-                                                <i className="fa fa-filter" aria-hidden="true" style={{ color: 'red', marginRight: '3px' }}></i>
-                                                Những món bán chạy nhất
-                                            </th>
-                                        </tr>
                                         <tr style={{ backgroundColor: 'gold' }}>
                                             <td>
                                                 {this.rank_dish_name[0]}

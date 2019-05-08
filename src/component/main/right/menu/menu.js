@@ -89,7 +89,6 @@ class Menu extends Component {
             if (this.state.tab === 'Food') {
                 this.arrFood = [];
                 listDish.forEach(aDish => {
-
                     if (aDish.food_name.indexOf(strSearch) >= 0)
                         this.arrFood.push(aDish);
                 })
@@ -152,6 +151,9 @@ class Menu extends Component {
             const urlPostNewDish = 'http://localhost:3001/dashboard/menu/new';
             const urlPostEditDish = 'http://localhost:3001/dashboard/menu/edit';
             this.state.editing ? this.postData(urlPostEditDish, editDish) : this.postData(urlPostNewDish, newdish)
+            if(this.state.editing) this.setState({
+                editing: false
+            })
         }
         this.init();
     }
@@ -291,7 +293,7 @@ class Menu extends Component {
                                         <div className="lbl NewDish-chooseImg">Chọn ảnh</div>
                                     </div>
                                     <div id="input-imgNewDish">
-                                        <input type="file" ref="fileNewDishImage" id="file-newDishImage" ></input>
+                                        <input type="file" ref="fileNewDishImage" id="file-newDishImage"></input>
                                         <img ref="image_newDish" name="new Dish" className="NewDish-img" />
                                     </div>
                                 </div>

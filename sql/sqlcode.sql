@@ -84,13 +84,13 @@ insert into MyTable(status)
 values 
 ("empty"),
 ("empty"),
-("notempty"),
 ("empty"),
 ("empty"),
 ("empty"),
-("notempty"),
 ("empty"),
-("notempty");
+("empty"),
+("empty"),
+("empty");
 
 INSERT INTO food(id,category,food_name,food_price)
 values 
@@ -124,27 +124,6 @@ values
 ("vuduy","manunited"),
 ("manager","12345678");
 
-INSERT INTO Bill(id_table,check_date,total_cost,payment)
-VALUES 
-(2,"2019-03-26",1200000,'yes'),
-(3,"2019-03-27",900000,'no'),
-(1,"2019-03-21",1200000,'yes'),
-(5,"2019-02-26",100000,'yes'),
-(4,"2019-03-26",2300000,'yes'),
-(6,"2019-03-26",100000,'yes'),
-(7,"2019-03-26",100000,'yes'),
-(9,"2019-03-26",100000,'yes');
-
-INSERT INTO BillDetail(id,food_name,food_count)
-VALUES 
-(2,"Gà rán",3),
-(2,"Mực xào",1),
-(3,"Cá nướng",1),
-(4,"Rượu nho",5),
-(4,"Nước mía",1),
-(5,"Mực nướng",1),
-(6,"Bún bò",1),
-(6,"Lẩu gà",1);
 
 INSERT INTO Employee(id,id_account,name,sex,birthday,phone)
 VALUES 

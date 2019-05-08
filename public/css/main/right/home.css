@@ -75,7 +75,7 @@
 }
 
 .thongke-doanhthu{
-    width: 35%;
+    width: 45%;
     height: 85%;
     float: left;
     padding-top: 10px;
@@ -85,18 +85,19 @@
 
 
 .thongke-xephangmonan{
-    width: 60%;
+    width: 55%;
     height: 85%;
-    margin-left: 40%;
+    margin-left: 45%;
     padding-top: 10px;
 }
 
 #home-thongke th,td{
     word-break:break-all;
     height: 32px;
+    overflow-x: initial;
 }
 
-.thongke-table tbody{
+.thongke-table{
     width: 100%
 }
 
@@ -120,7 +121,8 @@
 }
 
 .thongke-table tbody tr td:nth-child(2){
-    text-align: left;
+    text-align: right;
+    padding-right: 4px;
 }
 
 .thongke-xephangmonan th, .thongke-xephangmonan tr{

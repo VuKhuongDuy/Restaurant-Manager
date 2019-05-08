@@ -6,6 +6,7 @@ export default class TablesPayment extends Component {
         this.loadData();
         var x = new Date();
         this.today = x.getDate() + "/" + x.getMonth() + "/" + x.getFullYear();
+        this.status = 'notempty'
         this.state = {
             reRender: 1
         }
@@ -43,10 +44,11 @@ export default class TablesPayment extends Component {
             referrer: "no-referrer"
         }).then(response => response.json())
             .then(data => {
-                data.map((value, key) => {
+                console.log(data);
+                data.listFood.map((value, key) => {
                     this.foods.push(value);
                 })
-
+                this.status = data.status;
                 this.reRender()
             })
     }
@@ -67,8 +69,8 @@ export default class TablesPayment extends Component {
     }
 
     clickPayment() {
-        if(this.foods.length>0){
-            alert('Đã thanh toán hóa đơn ở bàn số '+ this.id_table + 'số tiền là: '+this.totalPrice+'\n \
+        if(this.status === 'notempty'){
+            alert('Đã thanh toán hóa đơn ở bàn số'+  this.id_table + 'số tiền là: '+this.totalPrice+'\n \
             Bàn số '+this.id_table+' trống');
             this.post();
         }else{

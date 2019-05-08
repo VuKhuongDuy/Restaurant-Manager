@@ -46,7 +46,6 @@ class history extends Component {
     }
 
     setIDBillDetail(id){
-        console.log('id----:'+id);
         this.setState({
             id_bill : id
         })
@@ -54,9 +53,7 @@ class history extends Component {
 
     renderBillDetail() {
         return this.listBillDetail.map((value,key)=>{
-            console.log(value.id+"-----"+this.state.id_bill)
             if(value.id == this.state.id_bill){
-                console.log(value);
                 return <ADish food_name = {value.food_name} food_price={value.food_price} food_count = {value.food_count} total_cost = {value.total_cost} key={key}/>
             }
         })

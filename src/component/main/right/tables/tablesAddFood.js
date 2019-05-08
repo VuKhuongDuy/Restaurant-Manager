@@ -45,23 +45,22 @@ export default class TablesAddFood extends Component {
             })
     }
 
-    postData(url, data) {
-        console.log('postadasd')
-        axios.post(url,data).then((response)=>{
-            alert('Thêm thành công')
+    async postData(url, data) {
+        await axios.post(url,data).then((response)=>{
+            alert('Thêm thành công');
         }).catch((err)=>{
-            console.log('dm loi: ',err)
+            console.log('YourTeamError: ',err)
         })
     }
 
-    clickAcceptAddFood() {
+    async clickAcceptAddFood() {
         if(this.foodOrders.length>0){
             var data = {
                 id_table: this.id,
                 data: this.foodOrders
             };
             var url = "http://localhost:3001/dashboard/tables/addfood/";
-            this.postData(url, data);
+            await this.postData(url, data);
             this.foodOrders = []; 
         }else{
             alert('Hãy chọn món')

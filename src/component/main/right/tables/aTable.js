@@ -32,8 +32,8 @@ class ATable extends Component {
             .catch(err => console.error('Error', err));
     }
 
-    putData_changeTable(idOld,idNew){
-        fetch('http://localhost:3001/dashboard/tables/change',{
+    putData_changeTable(idOld, idNew) {
+        fetch('http://localhost:3001/dashboard/tables/change', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -54,15 +54,26 @@ class ATable extends Component {
     }
 
     changeTable() {
-        let canChange = true
-        const id_table_willchange = prompt("CHANGE FROM TABLE "+this.props.id+" -> TABLE ");
-        console.log(id_table_willchange);
-        this.props.tables.map((value,key)=>{
-            if(value.id == id_table_willchange && value.status == 'notempty')
-                canChange = false
+        if (this.props.status === 'notempty') {
+            const id_table_willchange = prompt("CHANGE FROM TABLE " + this.props.id + " -> TABLE ");    
+            if (this.canChange(id_table_willchange))
+                this.putData_changeTable(this.props.id, id_table_willchange);
+            else alert('Không thể chuyển tới bàn này \n \(Có thể bàn này có người hoặc bàn không tồn tại).')
+        } else {
+            alert('Bàn trống, không có gì để chuyển')
+        }
+    }
+
+    canChange(id_table_willchange){
+        let tableExit = false;
+        this.props.tables.map((value, key) => {
+            if (value.id == id_table_willchange){
+                if(value.status == 'notempty')
+                    return false;
+                tableExit = true;
+            }
         })
-        if(canChange)
-            this.putData_changeTable(this.props.id,id_table_willchange);
+        return tableExit;
     }
 
     clickAddFood() {
